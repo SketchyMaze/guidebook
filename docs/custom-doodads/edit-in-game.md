@@ -1,27 +1,35 @@
 # Drawing a Doodad In-Game
 
-Project: Doodle has some **limited** support to draw your doodad sprites
-in-game. Currently you can only draw one frame (image) for the doodad
-and save it to disk.
+Project: Doodle has support for drawing your custom doodad sprites in-game,
+although for now you may find it more comfortable to use an
+[external image editor](edit-external.md) instead.
 
-To start a new doodad, open the game and enter the level editor.
+To start a new doodad, open the game and enter the level editor. Select the
+"File -> New Doodad" menu at the top of the screen. You will be prompted for
+the square dimensions of your doodad (i.e. `100` for a 100x100 sprite) and
+you can begin editing.
 
-Select the "New Doodad" button at the top of the screen to start drawing a
-new doodad. Choose the size (square) of its sprite when prompted.
+![Screenshot of the Doodad editor](../images/doodad-editor.png)
 
-Doodads saved in-game go in your user config directory for the game. On Linux,
-this is at ~/.config/doodle.
+## Layers
 
-If you want to create a doodad with multiple frames (to animate it or have
-varying states that change the doodad's appearance in the level), the
-`doodad` tool is recommended. See
-[drawing images in an external program](edit-external.md).
+A key difference between Levels and Doodads are that Doodad drawings can have
+multiple **layers**. For doodads these are used to store multiple frames of
+animation or different states, such as an opened vs. closed door.
+
+Clicking the **Lyr.** button on the left toolbar or the "Tools -> Layers"
+menu will open the Layers window where you can switch your editor between
+layers, add and rename them. Layers can be toggled by the doodad's
+[JavaScript code](scripts.md) by index number or by name, so giving each layer
+a descriptive name is useful.
+
+Doodads saved in-game go in your [user config directory](../profile-directory.md)
+on your system.
 
 ## Future Planned Features
 
 Creating doodads in-game is intended to be a fully supported feature. The
 following features are planned to be supported:
 
-* Support editing multiple frames instead of only the first frame.
 * Implement some features only available on the `doodad` tool using in-game
   UI, such as attaching JavaScripts to the doodad.

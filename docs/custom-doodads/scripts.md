@@ -5,7 +5,12 @@ and ability to interact with the player and other doodads.
 
 Doodad scripts are run during "Play Mode" when a level _containing_ the doodad
 is being played. You can install a JavaScript (.js) file into a doodad using
-the command-line `doodad` program.
+the `doodad` [command line program](../doodad-tool.md) that
+shipped with your game:
+
+```bash
+> doodad install-script index.js filename.doodad
+```
 
 An example Doodad script looks like the following:
 
