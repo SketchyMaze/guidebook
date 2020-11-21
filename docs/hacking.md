@@ -6,6 +6,62 @@ I've always loved it when developers kept debugging features in their released
 games, and playing around with those and figuring out what makes the game tick.
 I purposely left some debug features in the game that you can play around with.
 
+## Debug Features
+
+Pressing `F3` within the game will draw the **Debug Overlay** on top of the
+screen, displaying details such as the game's frames per second and some
+contextual details like: what is the world index of the pixel below your mouse
+cursor, while you're editing a level? (Details such as this are also seen in
+the status bar at the bottom of the editor screen).
+
+The game can be launched with certain **Environment Variables** set to add
+some additional debug visuals to the game. Examples:
+
+```bash
+# Draw a semi-transparent yellow background over all level chunks
+$ DEBUG_CHUNK_COLOR=FFFF0066 ./doodle
+
+# Set a window size for the application
+# (equivalent to: doodle --window 1024x768)
+$ DOODLE_W=1024 DOODLE_H=768 ./doodle
+
+# Turn on lots of fun debug features.
+$ DEBUG_CANVAS_LABEL=1 DEBUG_CHUNK_COLOR=FFFF00AA \
+  DEBUG_CANVAS_BORDER=FF0 ./doodle
+```
+
+![Debug features enabled](images/debugging.png)
+
+Supported variables include:
+
+* `DOODLE_W` and `DOODLE_H` set the width and height of the application
+  window. Equivalent to the `--window` command-line option.
+* `D_SCROLL_SPEED` (int): tune the canvas scrolling speed. Default might
+  be around 8 or so.
+* `D_DOODAD_SIZE` (int): default size for newly created doodads
+* `D_SHELL_BG` (color): set the background color of the developer console
+* `D_SHELL_FG` (color): text color for the developer console
+* `D_SHELL_PC` (color): color for the shell prompt text
+* `D_SHELL_LN` (int): set the number of lines of output history the
+  console will show. This dictates how 'tall' it rises from the bottom
+  of the screen. Large values will cover the entire screen with console
+  whenever the shell is open.
+* `D_SHELL_FS` (int): set the font size for the developer shell. Default
+  is about 16. This also affects the size of "flashed" text that appears
+  at the bottom of the screen.
+* `DEBUG_CHUNK_COLOR` (color): set a background color over each chunk
+  of drawing (level or doodad). A solid color will completely block out
+  the wallpaper; semitransparent is best.
+* `DEBUG_CANVAS_BORDER` (color): the game will draw an insert colored
+  border around every "Canvas" widget (drawing) on the screen. The level
+  itself is a Canvas and every individual Doodad or actor in the level is
+  its own Canvas.
+* `DEBUG_CANVAS_LABEL` (bool): draws a text label over every Canvas
+  widget on the screen, showing its name or Actor ID and some properties,
+  such as Level Position (LP) and World Position (WP) of actors within
+  a level. LP is their placement in the level file and WP is their
+  actual position now (in case it moves).
+
 ## Developer Console
 
 Pressing the `Enter` key at any time will open the developer console at the
@@ -14,7 +70,7 @@ bottom of the screen (all gameplay logic is paused while the console is open).
 In the console you can type anything from simple commands, to hidden cheat
 codes, to JavaScript commands to operate on some of the game's internal code!
 
-![Screenshot of the developer console](../images/shell.png)
+![Screenshot of the developer console](images/shell.png)
 
 Pressing `Enter` again without typing a command will close the console.
 
@@ -169,4 +225,4 @@ Understanding that my game's [rendering engine](https://git.kirsle.net/go/render
 [user interface toolkit](https://git.kirsle.net/go/ui) are open source projects
 you can have fun reconfiguring widgets to change colors or whatever.
 
-![Screenshot of the JavaScript REPL](../images/jsrepl.png)
+![Screenshot of the JavaScript REPL](images/jsrepl.png)

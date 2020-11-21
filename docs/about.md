@@ -3,7 +3,7 @@
 Project: Doodle is a "drawing-based maze game" themed around hand-drawn mazes
 on paper.
 
-![Screenshot of the level editor](../images/about.png)
+![Screenshot of the level editor](images/about.png)
 
 You can draw your own custom maps, freehand or with some basic drawing tools,
 and then drag and drop pre-made "[doodads](doodads.md)" into your level for
@@ -32,7 +32,7 @@ pixels to mean "fire" and burn the player? Or do you want to decorate the tops
 of "bloody" spikes with red? Either way, the 'fire' attribute on that color will
 do the job and you can draw whatever shape you want for your level hazards.
 
-![Palette editor](../images/palette.png)
+![Palette editor](images/palette.png)
 
 ## Mod Friendly
 
