@@ -1,6 +1,6 @@
-# About Project: Doodle
+# About _Sketchy Maze_
 
-Project: Doodle is a "drawing-based maze game" themed around hand-drawn mazes
+**Sketchy Maze** is a "drawing-based maze game" themed around hand-drawn maps
 on paper.
 
 ![Screenshot of the level editor](images/about.png)
@@ -10,8 +10,8 @@ and then drag and drop pre-made "[doodads](doodads.md)" into your level for
 interactive things like keys, doors and buttons.
 
 This is an **early alpha build** of the game. Longer term it will include a couple
-built-in "single player campaigns" of multiple themed levels, but for now it
-just includes a couple example levels and the editor itself.
+of built-in "single player campaigns" of multiple themed levels, but for now it
+just includes a few example levels and the editor itself.
 
 ## Inspiration
 
@@ -27,7 +27,7 @@ you've got!)
 
 When you're drawing with a pen and paper, the level can be anything you want.
 You can draw a castle or a cave, place little gizmos and traps throughout the
-level (doors, keys, buttons and things) to create puzzles. Do you want the red
+level (doors, keys, buttons and things) and create puzzles. Do you want the red
 pixels to mean "fire" and burn the player? Or do you want to decorate the tops
 of "bloody" spikes with red? Either way, the 'fire' attribute on that color will
 do the job and you can draw whatever shape you want for your level hazards.

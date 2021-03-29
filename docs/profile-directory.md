@@ -1,6 +1,6 @@
 # Profile Directory
 
-Project: Doodle stores your user-created levels and custom doodads in your
+Sketchy Maze stores your user-created levels and custom doodads in your
 operating system's profile directory for your account.
 
 This will typically be found at the following locations based on your platform:

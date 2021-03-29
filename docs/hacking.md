@@ -1,8 +1,9 @@
 # Hacking
 
-This page discusses some advanced features of the game.
+This page discusses some advanced features of the game and targets a more
+technical audience.
 
-I've always loved it when developers kept debugging features in their released
+I've always loved it when developers keep debugging features in their released
 games, and playing around with those and figuring out what makes the game tick.
 I purposely left some debug features in the game that you can play around with.
 
@@ -216,7 +217,7 @@ undefined
 >$ d.EditDrawing("filename.level")
 ```
 
-It helps if you run Project: Doodle itself from a command line terminal,
+It helps if you run Sketchy Maze itself from a command line terminal,
 so you can see its developer console output also on your terminal
 window. Using `Object.keys(d)` will show all the exported functions and
 variables from the internal game state.

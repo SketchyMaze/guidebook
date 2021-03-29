@@ -1,14 +1,16 @@
-# Welcome to Project: Doodle
+# Welcome to _Sketchy Maze_
 
 ![](images/main-menu.png)
 
-[Project: Doodle](about.md) is a drawing-based maze game themed around hand-drawn
+[Sketchy Maze](about.md) is a drawing-based maze game themed around hand-drawn
 maps on paper. You can draw a level for a 2D platformer game, drag-and-drop
-"doodads" such as buttons and doors into your level, and play it.
+"doodads" such as buttons and doors into your level, play it and share your
+levels with others.
 
 ## Table of Contents
 
-* [About Project: Doodle](about.md)
+* [About Sketchy Maze](about.md)
+* [Gameplay Controls](controls.md)
 * [Creating Custom Levels](custom-levels/index.md)
 * [The Built-in Doodads](doodads.md)
 * [Creating Custom Doodads](custom-doodads/index.md)
@@ -18,3 +20,4 @@ maps on paper. You can draw a level for a 2D platformer game, drag-and-drop
 * [Shortcut Keys](hotkeys.md)
 * [The `doodad` command-line tool](doodad-tool.md)
 * [Hacking and debugging](hacking.md)
+* [Open Source Licenses](licenses.md)

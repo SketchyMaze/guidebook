@@ -1,6 +1,6 @@
 # Drawing a Doodad In-Game
 
-Project: Doodle has support for drawing your custom doodad sprites in-game,
+Sketchy Maze has support for drawing your custom doodad sprites in-game,
 although for now you may find it more comfortable to use an
 [external image editor](edit-external.md) instead.
 

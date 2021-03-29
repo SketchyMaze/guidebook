@@ -14,9 +14,14 @@ The `doodad` tool should be in the same place as the game executable.
 On Windows, the program is called `doodad.exe` and comes in the zip file next
 to the game executable, `doodle.exe`.
 
-On Linux, it will typically be at `/opt/project-doodle/doodad`.
+On Linux, it will typically be at `/opt/sketchymaze/doodad` if you installed
+the game from a .rpm or .deb package, or else for Flatpak it's included within
+the app bundle and invoked like so:
 
-On Mac OS, it is found inside the .app bundle.
+    $ flatpak run com.sketchymaze.Doodle doodad --help
+
+On Mac OS, it is found inside the .app bundle; right-click the 'Sketchy Maze.app'
+to find the option to browse inside the .app bundle.
 
 ## Usage
 
@@ -29,11 +34,11 @@ subcommand and `--help` to get help on that command, for example:
 doodad convert --help
 ```
 
-# Examples
+## Examples
 
 Here are some common scenarios and use cases for the doodad tool.
 
-## Show
+### Show
 
 ```bash
 # Usage:
@@ -84,14 +89,14 @@ Chunks:
   Use -chunks or -verbose to serialize Chunks
 ```
 
-## Convert
+### Convert
 
 ```bash
 # Usage:
 doodad convert [options] <input files.png> <output file.doodad>
 ```
 
-### Creating a Doodad from PNG images
+#### Creating a Doodad from PNG images
 
 Suppose you have PNG images named "frame0.png" through "frame3.png" and want
 to create a doodad from those images. This will convert them to the doodad
@@ -105,13 +110,13 @@ doodad convert frame0.png frame1.png frame2.png frame3.png custom.doodad
 doodad convert --tag color=blue frame{0,1,2,3}.png custom.doodad
 ```
 
-### Convert a level to a PNG image
+#### Convert a level to a PNG image
 
 ```bash
 doodad convert my.level output.png
 ```
 
-### Create a level from a PNG image
+#### Create a level from a PNG image
 
 ```bash
 doodad convert level.png output.level

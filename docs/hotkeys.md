@@ -1,6 +1,6 @@
 # Shortcut Keys
 
-Here are all the hotkeys/shortcuts used within Project: Doodle.
+Here are all the hotkeys/shortcuts used within Sketchy Maze.
 
 * [Global Shortcuts](#global-shortcuts)
 * [Level Editor](#editor-only)

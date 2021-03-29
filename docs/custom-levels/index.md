@@ -33,7 +33,7 @@ You can change these settings later if you change your mind.
 
 ### Wallpaper
 
-The wallpaper affects the "theme" of your level. Project: Doodle is themed around
+The wallpaper affects the "theme" of your level. Sketchy Maze is themed around
 hand-drawn mazes on paper, so the built-in themes look like various kinds of
 paper.
 
@@ -119,6 +119,10 @@ Levels are designed to have a limited color palette, and this is your selection
 of colors for the level or doodad you're drawing. You can click on "Add Color"
 to create more rows as needed.
 
+> **NOTICE:** Modifying the color of an existing swatch on your Palette will also
+> change any pixels _already on your level_ to the new color. Drawings in this
+> game use an indexed palette, similar to GIF and some PNG images!
+
 ### Color Attributes
 
 The **Attributes** column toggles behaviors on or off for this color. In the default
@@ -143,11 +147,12 @@ or `#0099FF` for <span style="color: #0099FF">light blue</span>. Colors can
 be entered in the following formats (the # prefix is actually optional):
 
 * 3-digit hexadecimal: `#F0F` or `#09F`
-* 6-digital hexadecimal: `#0099FF` or `#FC390E`
-* 8-digit RGBA: `#0000FF99`
+* 6-digit hexadecimal: `#0099FF` or `#FC390E`
+* 8-digit RGBA: `#0000FF99` - a color with semi-transparency!
 
-You can also set the color to be **semi-transparent** by providing an
-additional two hex characters for its alpha channel:
+You can set the color to be **semi-transparent** by providing the 8-digit RGBA
+color code; the extra two digits control the transparency between 00 (fully
+invisible) and FF (fully opaque).
 
 ![Enter an RGBA color value for see-thru colors](../images/palette-rgba.png)
 
@@ -163,17 +168,18 @@ pressing the `d` key, the Doodads window will appear in the level editor:
 
 Doodads are objects you drag and drop into your level to add interactive elements
 such as enemies and buttons. Mousing over a doodad will tell you its name, and
-the pager buttons at the bottom can show more options.
+the pager buttons at the bottom can show more options. See the
+[list of built-in doodads](../doodads.md) for details on what each one does.
 
 Click and drag a doodad from the Doodads window onto your level to place it.
 
-When the **Doodad Tool** is active on the left toolbar, when you mouse over an
+While the **Doodad Tool** is active on the left toolbar, when you mouse over an
 existing doodad on your level, and orange box will appear around it. You may
 click and drag to move this doodad somewhere else. Right-click it to remove it
 from your level.
 
-* Left click: move a doodad somewhere else on your level.
-* Right click: remove the doodad from your level.
+* Left click: **move a doodad** somewhere else on your level.
+* Right click: **removes the doodad** from your level.
 
 Doodads provide various useful features to your level:
 
@@ -187,6 +193,14 @@ Doodads provide various useful features to your level:
 
 To connect buttons to control doors, use the
 <img src="../images/sprites/link-tool.png" width="16" height="16"> **Link Tool.**
+
+### How do I remove a doodad from my level?
+
+Select the <img src="../images/sprites/actor-tool.png" width="16" height="16"> **Doodad Tool**
+to adjust the doodads already on your level.
+
+To remove a doodad: either **right-click on it** or else drag it from your level
+back into the Doodads window and release, and it will be gone from your level.
 
 ## Link Tool
 

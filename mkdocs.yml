@@ -1,16 +1,18 @@
-site_name: "Project: Doodle Guidebook"
+site_name: "Sketchy Maze: Guidebook"
 use_directory_urls: false
 nav:
   - Home: index.md
   - About: about.md
+  - Controls: controls.md
   - "Creating Levels": custom-levels/index.md
   - "Built-in Doodads": doodads.md
   - "Creating Doodads": custom-doodads/index.md
   - "Drawing Doodads": custom-doodads/edit-in-game.md
   - "Doodad Scripts": custom-doodads/scripts.md
   - "Shortcut Keys": hotkeys.md
-  - "`doodad` Tool": doodad-tool.md
+  - "`doodad` Program": doodad-tool.md
   - "Hacking": hacking.md
+  - "Open Source Licenses": licenses.md
 theme: readthedocs
 markdown_extensions:
   - toc:
