@@ -6,7 +6,8 @@ nav:
   - Controls: controls.md
   - "Creating Levels": custom-levels/index.md
   - "Built-in Doodads": doodads.md
-  - "Creating Doodads": custom-doodads/index.md
+  - "Linked Doodads": linked-doodads.md
+  - "Creating Custom Doodads": custom-doodads/index.md
   - "Drawing Doodads": custom-doodads/edit-in-game.md
   - "Doodad Scripts": custom-doodads/scripts.md
   - "Shortcut Keys": hotkeys.md

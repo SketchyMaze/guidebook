@@ -473,6 +473,8 @@ their custom event names.
 |------|-----------|--------------|
 | power | boolean | Communicates a "powered" (true) or "not powered" state, as in a Button to an Electric Door. |
 | broadcast:state-change | boolean | An "ON/OFF" button was hit and all state blocks should flip. |
+| sticky:down | boolean | A sticky button is pressed Down. If linked to other normal buttons, it tells them to press down as well. Sends a `false` when the Sticky Button itself pops back up. |
+| switch:toggle | boolean | A switch has been toggled from on to off. |
 
 ### Message.Publish(name string, data...)
 

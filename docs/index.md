@@ -13,6 +13,7 @@ levels with others.
 * [Gameplay Controls](controls.md)
 * [Creating Custom Levels](custom-levels/index.md)
 * [The Built-in Doodads](doodads.md)
+* [Linked Doodads](linked-doodads.md)
 * [Creating Custom Doodads](custom-doodads/index.md)
     * [Draw Sprites In-Game](custom-doodads/edit-in-game.md)
     * [Draw Sprites with an External Program](custom-doodads/edit-external.md)

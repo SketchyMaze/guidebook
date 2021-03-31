@@ -9,11 +9,14 @@ Doodads are available in the Level Editor by clicking on the
 and then dragging a doodad onto your level. See the [Doodad Tool](custom-levels/index.md#doodad-tool)
 for more information.
 
+**See also:** [Linked Doodads](linked-doodads.md) for how doodads interact when
+linked together in your levels.
+
 * [Flags](#flags)
     * [Start Flag](#start-flag)
     * [Exit Flag](#exit-flag)
 * [Doors & Trapdoors](#doors-trapdoors)
-    * [Locked Doors & Keys](#locked-doors-keys)
+    * [Colored Locked Doors & Keys](#colored-locked-doors-keys)
     * [Small Key Doors](#small-key-doors)
     * [Warp Doors](#warp-doors)
     * [Trapdoors](#trapdoors)
@@ -33,9 +36,9 @@ for more information.
 
 ---
 
-# Flags
+## Flags
 
-## Start Flag
+### Start Flag
 
 ![Start Flag](images/doodads/start-flag.png)
 
@@ -49,7 +52,7 @@ A level without a Start Flag will spawn the player at the 0,0 coordinate at
 the top-left corner of the level, and flash an error about the missing Start
 Flag.
 
-## Exit Flag
+### Exit Flag
 
 ![Exit Flag](images/doodads/exit-flag.png)
 
@@ -58,9 +61,9 @@ flag to win the level.
 
 ---
 
-# Doors & Trapdoors
+## Doors & Trapdoors
 
-## Locked Doors & Keys
+### Colored Locked Doors & Keys
 
 ![Blue Locked Door](images/doodads/blue-door.gif) ![Blue Key](images/doodads/blue-key.png)
 
@@ -88,7 +91,7 @@ Each key/door pair also has a distinct shape for color-impaired players:
 * **Yellow Key** (star)
 * **Blue Key** (diamond)
 
-## Small Key Doors
+### Small Key Doors
 
 ![Small Key Door](images/doodads/small-key-door.gif) ![Small Key](images/doodads/small-key.png)
 
@@ -99,7 +102,7 @@ unlock as many Small Key Doors as the number of keys they hold.
 The Small Key Door is permanently unlocked after unlocking it once. A golden
 padlock appears on the door when it's locked, which disappears after unlocking.
 
-## Warp Doors
+### Warp Doors
 
 ![Warp Door](images/doodads/warp-door.gif)
 
@@ -118,7 +121,7 @@ that the door is "locked" and it can not be entered by the player.
 **See also:** the [Blue & Orange Warp Doors](#blue-orange-warp-doors) tied to the
 [State Blocks](#state-blocks).
 
-## Trapdoors
+### Trapdoors
 
 ![Trapdoor](images/doodads/trapdoor-down.gif)
 
@@ -132,7 +135,7 @@ as a solid wall. If the door is open you may run in from the wrong side.
 Trapdoors come in four variants: downward-facing (default), rightward, leftward
 and upwards.
 
-## Crumbly Floor
+### Crumbly Floor
 
 ![Crumbly Floor](images/doodads/crumbly-floor.gif)
 
@@ -145,7 +148,7 @@ of the doodad.
 
 ---
 
-# Gizmos
+## Gizmos
 
 The gizmo doodads work best when **Linked** to other doodads in your level. For
 example, a Button linked to an Electric Door will cause the door to open whenever
@@ -153,7 +156,7 @@ the button is pressed.
 
 **See also:** [Link Tool](custom-levels/index.md#link-tool)
 
-## Buttons
+### Buttons
 
 ![Button Type A](images/doodads/button-a.gif) ![Button Type B](images/doodads/button-b.gif)
 
@@ -169,7 +172,7 @@ Buttons come in two varieties which are cosmetic only:
 * **Button:** a button with a grey arrow that pops back up when pressed.
 * **Button Type B:** a variation without the grey arrow but behaves the same.
 
-## Sticky Button
+### Sticky Button
 
 ![Sticky Button](images/doodads/sticky-button.gif)
 
@@ -180,7 +183,7 @@ When the Sticky Button is pressed, it will emit a `power: on` signal and it will
 signal from another linked doodad, then it will pop back up and can be pressed
 again.
 
-## Switches
+### Switches
 
 ![Switch](images/doodads/switch.gif) ![Switch Right](images/doodads/switch-right.gif)
 
@@ -195,7 +198,7 @@ same way):
 * Side-profile switches to attach to the side of a wall (left and right).
 * Side-profile floor switch.
 
-## Electric Door
+### Electric Door
 
 ![Electric Door](images/doodads/electric-door.gif)
 
@@ -208,13 +211,13 @@ will close.
 
 ---
 
-# Boolean State Doodads
+## Boolean State Doodads
 
 The **Boolean State Doodads** are a series of doodads which have a mutually
 exclusive state from one another, with their state toggled by the "ON/OFF"
 State Button.
 
-## State Button
+### State Button
 
 ![Blue "On"](images/doodads/blue-button.png) ![Orange "Off"](images/doodads/orange-button.png)
 
@@ -232,7 +235,7 @@ its state.
 * When the button is **OFF**, all **blue** state doodads are active. This is the default state.
 * When the button is **ON**, all **orange** state doodads are active.
 
-## State Blocks
+### State Blocks
 
 ![Blue "On"](images/doodads/blue-on.png) ![Blue "Off"](images/doodads/blue-off.png)
 
@@ -244,7 +247,7 @@ another. In one state the block is solid, in another it is passable.
 The ON/OFF block will toggle all state blocks on the level to their opposite
 setting whenever it's touched by the player or other mobile doodad.
 
-## Blue & Orange Warp Doors
+### Blue & Orange Warp Doors
 
 ![Blue Warp Door](images/doodads/warp-door-blue.gif) ![Blue "Off" Door](images/doodads/warp-blue-off.png)
 
@@ -263,22 +266,26 @@ and vice versa for the **Orange Warp Door.**
 
 # Creatures
 
-## Red Bird
+### Red Bird
 
 ![Bird](images/doodads/bird.gif)
 
 The **Bird** is a simple creature which flies left and right across your level,
 changing direction when it encounters an obstacle.
 
+The bird has solid collision on its top side, so the player can ride on it
+across the level. It's very slippery, though!
+
 In the future, the bird will dive-bomb the player character in a diagonal
 trajectory when it sees a shot it can take. This will harm the player if the
 bird hits. If the bird hits the player, or misses and touches the ground, it
 will fly back up to its original altitude and continue its A.I. program of
-flying back and forth and searching for the player.
+flying back and forth and searching for the player. It will also be easier to
+ride more reliably.
 
 Currently, however, the bird is harmless and does not dive bomb the player.
 
-## Red Azulian (Test Mob)
+### Red Azulian (Test Mob)
 
 ![Red Azulian](images/doodads/red-azulian.gif)
 
