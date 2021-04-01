@@ -2,18 +2,19 @@ site_name: "Sketchy Maze: Guidebook"
 use_directory_urls: false
 nav:
   - Home: index.md
-  - About: about.md
+  - About Sketchy Maze: about.md
+  - Change History: changes.md
   - Controls: controls.md
-  - "Creating Levels": custom-levels/index.md
-  - "Built-in Doodads": doodads.md
-  - "Linked Doodads": linked-doodads.md
-  - "Creating Custom Doodads": custom-doodads/index.md
-  - "Drawing Doodads": custom-doodads/edit-in-game.md
-  - "Doodad Scripts": custom-doodads/scripts.md
-  - "Shortcut Keys": hotkeys.md
+  - Creating Levels: custom-levels/index.md
+  - Built-in Doodads: doodads.md
+  - Linked Doodads: linked-doodads.md
+  - Creating Custom Doodads: custom-doodads/index.md
+  - Drawing Doodads: custom-doodads/edit-in-game.md
+  - Doodad Scripts: custom-doodads/scripts.md
+  - Shortcut Keys: hotkeys.md
   - "`doodad` Program": doodad-tool.md
-  - "Hacking": hacking.md
-  - "Open Source Licenses": licenses.md
+  - Hacking: hacking.md
+  - Open Source Licenses: licenses.md
 theme: readthedocs
 markdown_extensions:
   - toc:
