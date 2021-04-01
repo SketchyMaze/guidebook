@@ -261,5 +261,3 @@ Its options include:
 * **Help**
     * User Manual (F1)
     * About
-
-![Doodad Toolbar View](../images/editor-2.png)
