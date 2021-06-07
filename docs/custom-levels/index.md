@@ -33,6 +33,8 @@ You can change these settings later if you change your mind.
 
 ### Wallpaper
 
+![Wallpaper options on New Level](../images/palettes.png)
+
 The wallpaper affects the "theme" of your level. Sketchy Maze is themed around
 hand-drawn mazes on paper, so the built-in themes look like various kinds of
 paper.
@@ -42,10 +44,19 @@ paper.
   margin on the top and left edges.
 * **Legal Pad** looks like ruled yellow legal pad. It's similar to Notebook but
   has yellow paper and a second vertical red line down the left.
+* **Graph paper** `new in v0.6.0` is a white paper with a repeating grid pattern
+  of light-grey lines about 32px each; a darker dotted gray grid every 3x3 units;
+  and a teal grid every 6x6 units. A light version of Blueprint.
+* **Dotted paper** `new in v0.6.0` is a white page with a repeating pattern of
+  single dots every 32 pixels apart. Most dots are light blue but with a grid of
+  red dots every 6x6 units. It has the same grid spacing as the Graph paper.
 * **Blueprint** is a dark blueprint paper background with a repeating grid pattern.
-  Notably, the default Color Palette for this theme is different than normal:
-  "solid" lines are white instead of black, to show up better against the dark
-  background.
+  A dark version of Graph paper; you'll want to pair it with the **Blueprint Palette**
+  which has light colors for level geometry by default.
+* **Pure White** is a blank, white (#FFFFFE) background color with nothing going
+  on except for what you draw on your level.
+* **Custom wallpaper...** lets you use your own wallpaper image. See
+  [Custom Wallpaper](custom-wallpaper.md).
 
 The decorations of the wallpaper vary based on the Page Type. For example, the
 Notebook and Legal Pad have extra padding on the top of the page and red lines
@@ -57,6 +68,39 @@ lines pattern. The page types and their effect on the wallpapers are:
   corner.
 * **Unbounded** levels only use the repeating tiled pattern across the entire
   level, because there is no top-left boundary to anchor those decorations to.
+
+### Default Palette
+
+When starting a **new** level, you may choose a default Palette to start out
+with. The available options as of **version 0.6.0** are:
+
+* **Default:** the classic palette from previous alpha game releases.
+    1. **solid**: black, solid geometry
+    2. **decoration**: light grey
+    3. **fire**: red, fire
+    4. **water**: blue, water
+* **Colored Pencil:** a new palette with some more varied default colors.
+    1. **grass**: green, solid geometry
+    2. **dirt**: brown, solid
+    3. **stone**: dark grey, solid
+    4. **fire**: red, fire
+    5. **water**: light blue (#0099FF), water
+* **Blueprint:** the classic palette for levels with the Blueprint wallpaper:
+    1. **solid**: white, solid
+    2. **decoration:** light grey
+    3. **fire**: light red (#FF5000), fire
+    4. **water**: light blue (#0099FF), water
+    5. **electric**: yellow, solid
+
+In earlier alpha versions of the game, the Blueprint palette was chosen by
+default when the level starts out with the Blueprint wallpaper, which has a
+very dark background color and Blueprint was basically a bright version of
+the Default palette. As of v0.6.0, the user can select the palette separately
+from the wallpaper.
+
+If you're using the Blueprint wallpaper, pick the Colored Pencil or Blueprint
+palettes for best results: the default black color for level geometry won't
+show well on the Blueprint wallpaper!
 
 ## Editor Interface
 
@@ -107,57 +151,6 @@ Quick 5-second overview of the editor interface:
       color, rename it, and set its properties. See [Color Attributes](#color-attributes)
 
 ---
-
-## Palette Editor
-
-![Screenshot of the Level Palette editor](../images/palette.png)
-
-Clicking the "Tools" menu and "Edit Palette", or the Edit button on the
-palette toolbar on the right side of the screen, will open the palette editor.
-
-Levels are designed to have a limited color palette, and this is your selection
-of colors for the level or doodad you're drawing. You can click on "Add Color"
-to create more rows as needed.
-
-> **NOTICE:** Modifying the color of an existing swatch on your Palette will also
-> change any pixels _already on your level_ to the new color. Drawings in this
-> game use an indexed palette, similar to GIF and some PNG images!
-
-### Color Attributes
-
-The **Attributes** column toggles behaviors on or off for this color. In the default
-color palette, black pixels make up your **solid** level geometry, red pixels are
-**fire**, and blue pixels are **water**.
-
-By default the color will be purely decorative, not physically colliding with the
-player or affecting them in any way.
-
-The attributes and their meanings are:
-
-* **Solid**: the player character and other mobile doodads will collide against
-  pixels drawn in this color. Useful for your level geometry.
-* **Fire**: if the player touches pixels of this color, they die!
-* **Water**: will act like water, currently it just draws the player blue.
-
-### Changing Colors
-
-Clicking on the colored square will prompt you to enter a new color in
-hexadecimal notation, like `#FF00FF` for <span style="color: #FF00FF">magenta</span>
-or `#0099FF` for <span style="color: #0099FF">light blue</span>. Colors can
-be entered in the following formats (the # prefix is actually optional):
-
-* 3-digit hexadecimal: `#F0F` or `#09F`
-* 6-digit hexadecimal: `#0099FF` or `#FC390E`
-* 8-digit RGBA: `#0000FF99` - a color with semi-transparency!
-
-You can set the color to be **semi-transparent** by providing the 8-digit RGBA
-color code; the extra two digits control the transparency between 00 (fully
-invisible) and FF (fully opaque).
-
-![Enter an RGBA color value for see-thru colors](../images/palette-rgba.png)
-
-> Pictured: I have set the "solid" color to #000000**33** giving it an alpha
-> value -- making it semi transparent against the level wallpaper.
 
 ## Doodad Tool
 
@@ -227,6 +220,70 @@ When the button is released, it sends a "power off" signal and the door closes.
 
 See the [Doodads](../doodads.md) page for a description of the game's built-in
 doodads and how they interact with each other.
+
+---
+
+## Palette Editor
+
+![Screenshot of the Level Palette editor](../images/palette.png)
+
+The Palette is the set of colors that you draw your actual level with. In your
+default palette, some colors are designated as "solid" and will be used for the
+walls and floors of your level, while others may be "fire" or "water" or just
+decoration (not colliding with the player characters).
+
+You may edit or extend the palette to your liking. By Clicking the "Tools" menu
+and "Edit Palette", or clicking the "Edit" button on the palette toolbar on the
+right side of the screen, you will open the Palette Editor.
+
+Levels are designed to have a limited color palette, and this is your selection
+of colors for the level or doodad you're drawing. You can click on "Add Color"
+to create more rows as needed. There isn't a maximum bounds on number of distinct
+colors, however, the user interface will not accommodate too many of them. This
+game is themed around "hand-drawn maps on paper" and pretend each color is a pen
+or marker and how many distinct colors do you need?
+
+> **NOTICE:** Modifying the color of an existing swatch on your Palette will also
+> change any pixels _already on your level_ to the new color. Drawings in this
+> game use an indexed palette, similar to GIF and some PNG images!
+
+### Color Attributes
+
+The **Attributes** column toggles behaviors on or off for this color. In the default
+color palette, black pixels make up your **solid** level geometry, red pixels are
+**fire**, and blue pixels are **water**.
+
+By default the color will be purely decorative, not physically colliding with the
+player or affecting them in any way.
+
+The attributes and their meanings are:
+
+* **Solid**: the player character and other mobile doodads will collide against
+  pixels drawn in this color. Useful for your level geometry.
+* **Fire**: if the player touches pixels of this color, they die!
+* **Water**: will act like water, currently it just draws the player blue.
+
+### Changing Colors
+
+Clicking on the colored square will prompt you to enter a new color in
+hexadecimal notation, like `#FF00FF` for <span style="color: #FF00FF">magenta</span>
+or `#0099FF` for <span style="color: #0099FF">light blue</span>. Colors can
+be entered in the following formats (the # prefix is actually optional):
+
+* 3-digit hexadecimal: `#F0F` or `#09F`
+* 6-digit hexadecimal: `#0099FF` or `#FC390E`
+* 8-digit RGBA: `#0000FF99` - a color with semi-transparency!
+
+You can set the color to be **semi-transparent** by providing the 8-digit RGBA
+color code; the extra two digits control the transparency between 00 (fully
+invisible) and FF (fully opaque).
+
+![Enter an RGBA color value for see-thru colors](../images/palette-rgba.png)
+
+> Pictured: I have set the "solid" color to #000000**33** giving it an alpha
+> value -- making it semi transparent against the level wallpaper.
+
+---
 
 ## Menu Bar
 
