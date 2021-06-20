@@ -1,5 +1,56 @@
 # Changes
 
+## v0.7.0 (June 20 2021)
+
+This is the first release of the game where the "free version" drifts meaningfully
+away from the "full version". Free versions of the game will show the label
+"(shareware)" next to the game version numbers and will not support embedding
+doodads inside of level files -- for creating them or playing them.
+Check the website for how you can register the full version of the game.
+
+This release brings several improvements to the game:
+
+* **Brush Patterns** for your level palette. Instead of your colors drawing on as
+  plain, solid pixels, a color swatch can _sample_ with a Pattern to create a
+  textured appearance when plotted on your level. Several patterns are built in
+  including Noise, Marker, Ink, and others. The idea is that your brush strokes can
+  look as though they were drawn in pencil graphite or similar.
+* **Title Screen:** the demo level shown on the title screen will leisurely scroll
+  around the page. The arrow keys may still manually scroll the level any direction.
+* **Attach Doodads to Level Files:** this is the first release that supports _truly_
+  portable custom levels! By attaching your custom doodads _with_ your custom level
+  file, it will "just play" on someone else's computer, and they don't need to copy
+  all your custom doodads for it to work! But, free versions of the game will not
+  get to enjoy this feature.
+* **Settings UI**: a "Settings" button on the home screen (or the Edit->Settings
+  menu in the editor) will open a settings window. Check it out!
+* **Horizontal Toolbars option:** if enabled in the Settings window, the toolbar
+  and palette in the Editor will be horizontal instead of vertical, along the top
+  and bottom of the screen. This may be better optimized for smartphone-sized
+  screens like the Pinephone. If the program is started with `-w mobile` the first
+  time, it will use horizontal toolbars by default.
+
+Some small bits of polish in the game's user interface:
+
+* Some buttons are more colorful! The "Ok" button in alert boxes is blue and pressing
+  Enter will select the blue button.
+* When opening a drawing to play or edit, a blue **Browse...** button is
+  added so you can more easily find downloaded custom levels and play them.
+* In the Level Editor, the "Level ->  **Attached Files**" menu will let you see
+  and manage files attached to your level, such as its custom wallpaper image or
+  any custom doodads that were published with the level.
+* The keyboard shortcut to open the developer console is now the tilde/grave key
+  (`) instead of Enter.
+
+Bugs fixed:
+
+* The WASD keys to move the player character (as an alternative to the arrow keys)
+  now works more reliably. Previously, they were affected by key-repeat so Boy would
+  do a quick hop followed by a longer one when pressing W to jump. Also, his
+  animation would not update correctly when moving via the WASD keys. Both bugs
+  are fixed in this release.
+* Shortcut keys advertised in the menu, such as Ctrl-N and Ctrl-S, now actually work.
+
 ## v0.6.0-alpha (June 6 2021)
 
 This release brings less jank and some new features.

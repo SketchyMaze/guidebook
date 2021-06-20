@@ -247,6 +247,22 @@ or marker and how many distinct colors do you need?
 > change any pixels _already on your level_ to the new color. Drawings in this
 > game use an indexed palette, similar to GIF and some PNG images!
 
+### Brush Patterns
+
+A color swatch on your palette may have a Brush Pattern (labeled "Tex") applied
+to it which will vary the look of your color once drawn onto your level. For
+example, instead of a red color drawing on as solid red pixels, it can take on
+a more noisy pattern resembling colored pencil graphite or marker.
+
+![Screenshot showing various brush patterns](../images/patterns.png)
+
+The pattern when drawn onto your level is a cosmetic-only effect: you can change
+the pattern after the fact, or remove the pattern altogether, and your level
+immediately updates.
+
+In the future, you will be able to add your own custom pattern images but for
+now there are a handful of built-in options to choose from.
+
 ### Color Attributes
 
 The **Attributes** column toggles behaviors on or off for this color. In the default
@@ -280,9 +296,6 @@ invisible) and FF (fully opaque).
 
 ![Enter an RGBA color value for see-thru colors](../images/palette-rgba.png)
 
-> Pictured: I have set the "solid" color to #000000**33** giving it an alpha
-> value -- making it semi transparent against the level wallpaper.
-
 ---
 
 ## Menu Bar
@@ -295,26 +308,30 @@ Its options include:
     * New doodad
     * Save (Ctrl-S)
     * Save as...
+    * Publish level (attach custom doodads for easy sharing)
     * Open... (Ctrl-O)
     * Close level
     * Quit (Escape)
 * **Edit**
     * Undo (Ctrl-Z)
     * Redo (Ctrl-Y)
+    * Settings
 * **Level**
     * Page settings (to change the level type or wallpaper)
+    * Attached files
     * Playtest (P)
 * **Tools**
     * Debug overlay (F3)
     * Command shell (Enter)
     * Edit Palette
-    * Doodads (d)
     * Pencil Tool (f)
     * Line Tool (L)
     * Rectangle Tool (r)
     * Ellipse Tool (c)
     * Eraser Tool (x)
+    * Doodads (d)
     * Link Tool
 * **Help**
     * User Manual (F1)
+    * Register
     * About

@@ -4,6 +4,12 @@
 will be usable from gamepad controllers, especially if it branches out and
 targets platforms other than desktop computers in the future.
 
+The list of controls is also viewable in-game in the Settings Window, accessible
+from the title screen or the Edit->Settings menu of the editor. The controls can
+not be customized at this time.
+
+![Controls UI](images/controls.png)
+
 ## During Gameplay
 
 While playing a level, the following keys are used to control the player character:

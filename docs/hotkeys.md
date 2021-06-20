@@ -12,7 +12,7 @@ Here are all the hotkeys/shortcuts used within Sketchy Maze.
 |----------|------------------------------------------------------------|
 | `Escape` | Exit the application (after confirmation modal).           |
 | `F1`     | Open the Guidebook (this site).                            |
-| `Enter`  | Open the [developer console](hacking.md#developer-console) |
+| <code>`</code> | Open the [developer console](hacking.md#developer-console) |
 
 ---
 

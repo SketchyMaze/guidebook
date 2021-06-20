@@ -13,6 +13,33 @@ image editor. Then, you can program their behavior using JavaScript to make them
 * Program its Behavior
     * [JavaScript](scripts.md)
 
+## Naming Convention
+
+It is strongly encouraged that you name your custom doodad files with a
+prefix or something to _namespace_ them apart from the built-in doodads.
+
+For example: if you made a custom doodad named "door-red.doodad" it would
+actually conflict with the [built-in doodad](../doodads.md) of the same
+name, and your custom doodad would take priority over the built-in one.
+
+By prefixing your custom doodad filenames with your initials or name, you
+will minimize the likelihood that your doodad conflicts with a built-in
+from a future game release _or_ with custom doodads made by other players
+than yourself.
+
+Future versions of the game will likely prevent saving a new doodad with
+the same filename of a built-in one.
+
+## Profile Directory
+
+Custom doodads and levels will go in your [Profile Directory](../profile-directory.md),
+into folders named "doodads" and "levels" respectively.
+
+To share your custom doodads with others, you can copy the `.doodad` files out
+of your doodads folder. To install doodads made by others, place their `.doodad`
+files into your doodads folder, and they will appear in-game to drag and drop
+them into your level.
+
 ## doodad (Command Line Tool)
 
 Your copy of the game should have shipped with a `doodad` command-line tool

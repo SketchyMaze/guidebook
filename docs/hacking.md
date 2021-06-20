@@ -65,15 +65,16 @@ Supported variables include:
 
 ## Developer Console
 
-Pressing the `Enter` key at any time will open the developer console at the
-bottom of the screen (all gameplay logic is paused while the console is open).
+Pressing the tilde/grave key (<code>`</code>) at any time will open the developer
+console at the bottom of the screen (all gameplay logic is paused while the
+console is open).
 
 In the console you can type anything from simple commands, to hidden cheat
 codes, to JavaScript commands to operate on some of the game's internal code!
 
 ![Screenshot of the developer console](images/shell.png)
 
-Pressing `Enter` again without typing a command will close the console.
+Pressing `Enter` without typing a command will close the console.
 
 ## Commands
 
