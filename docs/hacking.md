@@ -138,7 +138,8 @@ The following commands are supported:
 ## Cheat Codes
 
 Typing these messages in the console will toggle various mundane cheat
-codes within the game:
+codes within the game. Press the tilde/grave key (<code>`</code>) to
+open the developer console and type:
 
 * `unleash the beast`
 

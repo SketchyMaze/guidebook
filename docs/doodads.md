@@ -12,15 +12,22 @@ for more information.
 **See also:** [Linked Doodads](linked-doodads.md) for how doodads interact when
 linked together in your levels.
 
-* [Flags](#flags)
-    * [Start Flag](#start-flag)
-    * [Exit Flag](#exit-flag)
+* [Objects](#objects)
+    * [Start Flag](#start-flag) - Spawn point of a level
+    * [Exit Flag](#exit-flag) - Goal of a level
+    * [Box](#bog)
+* [Creatures](#creatures)
+    * [Boy](#boy) - The player character
+    * [Red Bird](#red-bird)
+    * [Red Azulian (test mob)](#red-azulian-test-mob)
 * [Doors & Trapdoors](#doors-trapdoors)
     * [Colored Locked Doors & Keys](#colored-locked-doors-keys)
     * [Small Key Doors](#small-key-doors)
     * [Warp Doors](#warp-doors)
     * [Trapdoors](#trapdoors)
     * [Crumbly Floor](#crumbly-floor)
+* [Objects](#objects)
+    * [Box](#box)
 * [Gizmos](#gizmos)
     * [Buttons](#buttons)
     * [Sticky Button](#sticky-button)
@@ -30,13 +37,10 @@ linked together in your levels.
     * [State Button](#state-button)
     * [State Blocks](#state-blocks)
     * [Blue & Orange Warp Doors](#blue-orange-warp-doors)
-* [Creatures](#creatures)
-    * [Red Bird](#red-bird)
-    * [Red Azulian (test mob)](#red-azulian-test-mob)
 
 ---
 
-## Flags
+## Objects
 
 ### Start Flag
 
@@ -58,6 +62,70 @@ Flag.
 
 The **Exit Flag** sets a goal point for the level. The player must touch this
 flag to win the level.
+
+### Box
+
+![Box](images/doodads/box.gif)
+
+The **Box** is a pushable object. If the player or another mobile doodad touches
+the box from the side, the box will move at a fixed speed. It can be pushed up
+and down slopes and it is affected by gravity.
+
+The box is taller than [Boy](#boy) and so can make a useful platform to jump on top of
+to reach a higher ledge.
+
+Boxes can be pushed by enemies too, but it gets dicey with multiple enemies
+pushing simultaneously. Boxes can be stacked on top of each other, but sometimes
+Boy will get "stuck" standing on top of the pile. If this happens, use the
+[cheat code](hacking.md#cheat-codes) `ghost mode` to get yourself unstuck.
+
+---
+
+# Creatures
+
+### Boy
+
+![Boy](images/doodads/boy.gif)
+
+**Boy** is the player character.
+
+If he touches a "fire" pixel, he dies! You get a message like "Watch out for fire!"
+and it doesn't even have to say "fire" - it'll use the color's name.
+
+If he touches water he'll turn blue. Swimming physics aren't hooked up yet!
+
+### Red Bird
+
+![Bird](images/doodads/bird.gif)
+
+The **Bird** is a simple creature which flies left and right across your level,
+changing direction when it encounters an obstacle.
+
+The bird has solid collision on its top side, so the player can ride on it
+across the level. It's very slippery, though!
+
+In the future, the bird will dive-bomb the player character in a diagonal
+trajectory when it sees a shot it can take. This will harm the player if the
+bird hits. If the bird hits the player, or misses and touches the ground, it
+will fly back up to its original altitude and continue its A.I. program of
+flying back and forth and searching for the player. It will also be easier to
+ride more reliably.
+
+Currently, however, the bird is harmless and does not dive bomb the player.
+
+### Red Azulian (Test Mob)
+
+![Red Azulian](images/doodads/red-azulian.gif)
+
+The red Azulian is a test mobile character. Not really an enemy, as he doesn't
+care about the player.
+
+The Azulian's A.I. just has it run left and right until it meets resistance.
+It can pick up keys, activate buttons and switches that it passes by, and can
+unlock doors.
+
+This mob will probably go away in future releases of the game and will remain
+in the code as a hidden easter egg.
 
 ---
 
@@ -261,40 +329,3 @@ a de-activated door.
 
 The **Blue Warp Door** is active at the same time as the **Blue State Blocks**,
 and vice versa for the **Orange Warp Door.**
-
----
-
-# Creatures
-
-### Red Bird
-
-![Bird](images/doodads/bird.gif)
-
-The **Bird** is a simple creature which flies left and right across your level,
-changing direction when it encounters an obstacle.
-
-The bird has solid collision on its top side, so the player can ride on it
-across the level. It's very slippery, though!
-
-In the future, the bird will dive-bomb the player character in a diagonal
-trajectory when it sees a shot it can take. This will harm the player if the
-bird hits. If the bird hits the player, or misses and touches the ground, it
-will fly back up to its original altitude and continue its A.I. program of
-flying back and forth and searching for the player. It will also be easier to
-ride more reliably.
-
-Currently, however, the bird is harmless and does not dive bomb the player.
-
-### Red Azulian (Test Mob)
-
-![Red Azulian](images/doodads/red-azulian.gif)
-
-The red Azulian is a test mobile character. Not really an enemy, as he doesn't
-care about the player.
-
-The Azulian's A.I. just has it run left and right until it meets resistance.
-It can pick up keys, activate buttons and switches that it passes by, and can
-unlock doors.
-
-This mob will probably go away in future releases of the game and will remain
-in the code as a hidden easter egg.

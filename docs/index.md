@@ -7,7 +7,7 @@ maps on paper. You can draw a level for a 2D platformer game, drag-and-drop
 "doodads" such as buttons and doors into your level, play it and share your
 levels with others.
 
-**Last Updated:** June 20, 2021 for Sketchy Maze v0.7.0.
+**Last Updated:** July 19, 2021 for Sketchy Maze v0.7.2.
 
 ## Table of Contents
 
