@@ -14,17 +14,22 @@ linked together in your levels.
 
 * [Objects](#objects)
     * [Start Flag](#start-flag) - Spawn point of a level
+    * [Checkpoint Flag](#checkpoint-flag) - **NEW in v0.8.0**
     * [Exit Flag](#exit-flag) - Goal of a level
-    * [Box](#bog)
+    * [Anvil](#anvil) - **NEW in v0.8.0**
+    * [Box](#box)
 * [Creatures](#creatures)
     * [Boy](#boy) - The player character
     * [Red Bird](#red-bird)
-    * [Red Azulian (test mob)](#red-azulian-test-mob)
+    * [Azulians](#azulians)
+    * [Thief](#thief) - **NEW in v0.8.0**
 * [Doors & Trapdoors](#doors-trapdoors)
     * [Colored Locked Doors & Keys](#colored-locked-doors-keys)
     * [Small Key Doors](#small-key-doors)
     * [Warp Doors](#warp-doors)
     * [Trapdoors](#trapdoors)
+    * [Electric Door](#electric-door)
+    * [Electric Trapdoor](#electric-trapdoor)
     * [Crumbly Floor](#crumbly-floor)
 * [Objects](#objects)
     * [Box](#box)
@@ -32,7 +37,6 @@ linked together in your levels.
     * [Buttons](#buttons)
     * [Sticky Button](#sticky-button)
     * [Switches](#switches)
-    * [Electric Door](#electric-door)
 * [Boolean State Doodads](#boolean-state-doodads)
     * [State Button](#state-button)
     * [State Blocks](#state-blocks)
@@ -50,11 +54,31 @@ The **Start Flag** sets the player spawn point in your level. There should be
 only one start flag per level.
 
 Multiple Start Flags in one level is considered to be an error; a warning is
-flashed on-screen and the player will spawn at one of the flags at random.
+flashed on-screen and the player will spawn at the "first" start flag it found.
 
 A level without a Start Flag will spawn the player at the 0,0 coordinate at
 the top-left corner of the level, and flash an error about the missing Start
 Flag.
+
+If the Start Flag is [linked](linked-doodads.md#start-flag) to another doodad
+in your level, then that doodad will be used for the player character. For example,
+linking a Start Flag to a Thief will use the Thief as the player character
+for that level instead of the default character, [Boy](#boy).
+
+### Checkpoint Flag
+
+![Checkpoint Flag](images/doodads/checkpoint-flag.png)
+
+The **Checkpoint Flag** records the player's position in the level each time
+he reaches a checkpoint. Should they die during the level, the option to
+"Retry from checkpoint" will teleport the player back to that location and
+continue gameplay without resetting the level -- so you keep any keys you
+have, unlocked doors remain unlocked, etc.
+
+The default checkpoint location is at the Start Flag, and crossing Checkpoint
+Flags updates it to the last flag touched. When a second checkpoint is touched,
+the previous checkpoint flags are reset and the player's spawn point is the
+checkpoint they most recently touched.
 
 ### Exit Flag
 
@@ -62,6 +86,22 @@ Flag.
 
 The **Exit Flag** sets a goal point for the level. The player must touch this
 flag to win the level.
+
+### Anvil
+
+![Anvil](images/doodads/anvil.png)
+
+The **Anvil** is a "harmless" object that becomes dangerous when it is falling.
+
+It has no collision and is affected by gravity; when falling, it is dangerous
+to any **mobile** doodad that it encounters, including the player character.
+Being hit by it will fail the level with "Watch out for falling anvils!" and
+you can retry from your last checkpoint. It destroys other mobile doodads that
+it lands on, removing them from the level.
+
+If it receives a **power** signal (from a [linked](linked-doodads.md#buttons)
+Button or Switch), the Anvil will reset to its original location on the level,
+making "reset buttons" possible for puzzle levels.
 
 ### Box
 
@@ -78,6 +118,11 @@ Boxes can be pushed by enemies too, but it gets dicey with multiple enemies
 pushing simultaneously. Boxes can be stacked on top of each other, but sometimes
 Boy will get "stuck" standing on top of the pile. If this happens, use the
 [cheat code](hacking.md#cheat-codes) `ghost mode` to get yourself unstuck.
+
+**New in v0.8.0:**
+If it receives a **power** signal (from a [linked](linked-doodads.md#buttons)
+Button or Switch), the Anvil will reset to its original location on the level,
+making "reset buttons" possible for puzzle levels.
 
 ---
 
@@ -113,19 +158,55 @@ ride more reliably.
 
 Currently, however, the bird is harmless and does not dive bomb the player.
 
-### Red Azulian (Test Mob)
+**New in v0.8.0:** the Bird no longer can pick up items such as keys, unless
+controlled by the player character.
+
+### Azulians
 
 ![Red Azulian](images/doodads/red-azulian.gif)
 
-The red Azulian is a test mobile character. Not really an enemy, as he doesn't
-care about the player.
+The **Red Azulian** was the first test mobile character, and the
+**Blue Azulian** was originally the player character in very early builds of
+the game.
 
-The Azulian's A.I. just has it run left and right until it meets resistance.
-It can pick up keys, activate buttons and switches that it passes by, and can
-unlock doors.
+The Azulians' A.I., when placed in your level, is that they walk right and
+left across the ground, changing directions when hitting an obstacle. They
+can pick up keys, unlock doors, and interact with buttons and switches that
+they walk onto - basically all the capabilities as the player character.
+The blue Azulian walks half as fast as the red one.
 
-This mob will probably go away in future releases of the game and will remain
-in the code as a hidden easter egg.
+You can play as them in your custom levels by linking a Start Flag to
+the Azulian.
+
+### Thief
+
+![Thief](images/doodads/thief.gif)
+
+The **Thief** is a mobile character which can steal items from other doodads,
+including the player character.
+
+The Thief's A.I. is to walk right and left, she can pick up items, unlock doors,
+and activate most devices that it walks onto. When she encounters another
+doodad (including the player), the Thief will **steal** any items they are
+carrying:
+
+* For items which have no quantity, such as the Blue Key, the Thief will only
+  steal it if she does not already have one, letting the player keep the
+  key.
+* Items with quantity are always stolen: the Thief will steal all your small
+  keys.
+* The A.I. Thief does **not** steal from other A.I. Thieves.
+
+The player can play **as** the Thief by using the Link Tool and connecting
+the Start Flag to a Thief. When controlled by the player character, the Thief
+has special abilities compared to most other characters:
+
+* You can steal items from other characters. When you contact another character
+  such as the Azulians, if they are holding any items, you'll automatically
+  steal them in the same way the Thief usually steals from you.
+* The player character is immune to Thieves which will not steal from Thieves.
+* The player character _can_, though, pilfer items that the other Thieves have
+  collected.
 
 ---
 
@@ -203,6 +284,27 @@ as a solid wall. If the door is open you may run in from the wrong side.
 Trapdoors come in four variants: downward-facing (default), rightward, leftward
 and upwards.
 
+### Electric Door
+
+![Electric Door](images/doodads/electric-door.gif)
+
+The sci-fi **Electric Door** can only be opened when it receives a "power" signal
+from a linked button or switch. See [Linked Doodads](custom-levels/index.md#link-tool).
+
+When the door receives a "power: on" signal it will open and allow passage to
+the player or other mobile doodads. When it receives a "power: off" signal it
+will close.
+
+### Electric Trapdoor
+
+![Electric Trapdoor](images/doodads/electric-trapdoor.gif)
+
+The **Electric Trapdoor** requires a power source to open it.
+
+If it receives a power signal from a linked Button or Switch, it will open.
+When it loses power, it will close. Switches will always toggle its state
+regardless of "power" status.
+
 ### Crumbly Floor
 
 ![Crumbly Floor](images/doodads/crumbly-floor.gif)
@@ -265,17 +367,6 @@ same way):
 * On/Off "background" wall switch that faces the screen.
 * Side-profile switches to attach to the side of a wall (left and right).
 * Side-profile floor switch.
-
-### Electric Door
-
-![Electric Door](images/doodads/electric-door.gif)
-
-The sci-fi **Electric Door** can only be opened when it receives a "power" signal
-from a linked button or switch. See [Linked Doodads](custom-levels/index.md#link-tool).
-
-When the door receives a "power: on" signal it will open and allow passage to
-the player or other mobile doodads. When it receives a "power: off" signal it
-will close.
 
 ---
 

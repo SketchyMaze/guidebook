@@ -1,6 +1,6 @@
 # Doodad Scripts
 
-Doodads are programmed using JavaScript which gives them their behavior
+Doodads are programmed using (ES5) JavaScript which gives them their behavior
 and ability to interact with the player and other doodads.
 
 Doodad scripts are run during "Play Mode" when a level _containing_ the doodad
@@ -58,9 +58,14 @@ function main() {
 }
 ```
 
-# Installing a Doodad Script
+## Installing a Doodad Script
 
-Use the command-line `doodad` tool to attach a script to your doodad file:
+Scripts can be attached to your doodad either in-game (using the Doodad
+Properties window in the editor) or by using the command-line `doodad` program.
+
+![In-game Script UI](../images/doodad-properties.png)
+
+Using the command-line [`doodad` tool](../doodad-tool.md):
 
 ```bash
 # Attach the JavaScript at "script.js" to the doodad file "filename.doodad"
@@ -71,7 +76,9 @@ doodad install-script script.js filename.doodad
 doodad show --script filename.doodad
 ```
 
-# Testing Your Script
+
+
+## Testing Your Script
 
 The best way to test your doodad script is to use it in a level!
 
@@ -80,13 +87,68 @@ like `console.log()` in your script to help debug issues. Drag your custom
 doodad into a level and playtest it! Your script's main() function is called
 when the level instance of your doodad is initialized.
 
-# JavaScript API
+## JavaScript API
 
 The following global variables are available to all Doodad scripts.
 
-## Self
+### Global Functions
+
+Some useful globally available functions:
+
+#### EndLevel()
+
+This ends the current level, i.e. to be used by the goal flag.
+
+#### FailLevel(message string)
+
+Trigger a failure condition in the level. For example, a hazardous doodad
+can cause a death message as though the player had touched a "fire" pixel
+on the level.
+
+#### SetCheckpoint(Point)
+
+Set the respawn point for the player character. Usually, this will be
+relative to a checkpoint flag's location on the level.
+
+```javascript
+Events.OnCollide(function(e) {
+    if (e.Settled && e.Actor.IsPlayer()) {
+        SetCheckpoint(Self.Position());
+    }
+})
+```
+
+#### Flash(message string, args...)
+
+Flash a message on screen to the user.
+
+Flashed messages appear at the bottom of the screen and fade out after a few
+moments. If multiple messages are flashed at the same time, they stack from the
+bottom of the window with the newest message on bottom.
+
+Don't abuse this feature as spamming it may annoy the player.
+
+#### GetTick() uint64
+
+Returns the current game tick. This value started at zero when the game was
+launched and increments every frame while running.
+
+#### time.Now() time.Time
+
+This exposes the Go standard library function `time.Now()` that returns the
+current date and time as a Go time.Time value.
+
+#### time.Add(t time.Time, milliseconds int64) time.Time
+
+Add a number of milliseconds to a Go Time value.
+
+--------
+
+### Self
 
 Self holds data about the current doodad instance loaded inside of a level.
+Many of these are available on other actors that collide with your doodad
+in the OnCollide handler, at event.Actor.
 
 **String attributes:**
 
@@ -95,12 +157,20 @@ Self holds data about the current doodad instance loaded inside of a level.
 
 Methods are below.
 
-### Self.ID() string
+#### Self.ID() string
 
 Returns the "actor ID" of the doodad instance loaded inside of a level. This
 is usually a random UUID string that was saved with the level data.
 
-### Self.GetTag(string name) string
+#### Self.IsPlayer() bool
+
+**New in v0.8.0**
+
+Check if the doodad is the player character. Some enemy creature doodads check
+this so as to disable their normal A.I. movement pattern and allow player
+controls to set its animations.
+
+#### Self.GetTag(string name) string
 
 Return a "tag" that was saved with the doodad's file data.
 
@@ -124,7 +194,7 @@ doodad edit-doodad -t 'color=' filename.doodad
 This is useful for a set of multiple doodads to share the same script but
 have different behavior depending on how each is tagged.
 
-### Self.Position() Point
+#### Self.Position() Point
 
 Returns the doodad's current position in the level.
 
@@ -135,7 +205,16 @@ var p = Self.Position()
 console.log("I am at %d,%d", p.X, p.Y)
 ```
 
-### Self.SetHitbox(x, y, w, h int)
+#### Self.MoveTo(Point)
+
+Teleport the current doodad to an exact point on the level.
+
+```javascript
+// Teleport to origin.
+Self.MoveTo(Point(0, 0))
+```
+
+#### Self.SetHitbox(x, y, w, h int)
 
 Configure the "solid hitbox" of this doodad.
 
@@ -174,7 +253,30 @@ function main() {
 }
 ```
 
-### Self.SetVelocity(Velocity)
+#### Self.Hitbox() Rect
+
+**New in v0.8.0**
+
+Return the current hitbox of your doodad. If you did not call Self.SetHitbox()
+yourself, then this will return the hitbox that was configured on the Doodad's
+Properties.
+
+Check Self.Hitbox().IsZero() to see whether the doodad has a hitbox configured
+at all (having a value of 0,0,0,0). For example, the generic doodad scripts
+run checks like this:
+
+```javascript
+function main() {
+    // If the doodad does not have a hitbox set, default it to
+    // the full square canvas size of this doodad.
+    if (Self.Hitbox().IsZero()) {
+        var size = Self.Size();
+        Self.SetHitbox(0, 0, size, size);
+    }
+}
+```
+
+#### Self.SetVelocity(Velocity)
 
 Set the doodad's velocity. Velocity is a type that can be created with the
 Velocity() constructor, which takes an X and Y value:
@@ -186,7 +288,7 @@ Self.SetVelocity( Velocity(3.2, 7.0) );
 A positive X velocity propels the doodad to the right. A positive Y velocity
 propels the doodad downward.
 
-### Self.SetMobile(bool)
+#### Self.SetMobile(bool)
 
 Call `SetMobile(true)` if the doodad will move on its own.
 
@@ -202,7 +304,7 @@ Position).
 Self.SetMobile(true);
 ```
 
-### Self.SetGravity(bool)
+#### Self.SetGravity(bool)
 
 Set whether gravity applies to this doodad. By default doodads are stationary
 and do not fall downwards. The player character and some mobile enemies that
@@ -210,9 +312,44 @@ want to be affected by gravity should opt in to this.
 
 ```javascript
 Self.SetGravity(true);
+
+// HasGravity to check.
+console.log(Self.HasGravity()); // true
 ```
 
-### Self.ShowLayer(index int)
+#### Self.SetInventory(bool)
+
+Set whether this doodad has an inventory and can carry items. Doodads without
+inventories can not pick up keys and other items.
+
+```javascript
+Self.SetInventory(true);
+Self.GetInventory(); // true
+```
+
+#### Self.AddItem(filename string, quantity int)
+
+Add an item to the current doodad's inventory. The filename is the name of the
+item to add, such as "key-blue.doodad"
+
+If the quantity is zero, the item goes in as a "key item" which does not show
+a quantity in your inventory. The four colored keys are examples of this, as
+compared to the Small Key which has a quantity.
+
+#### Self.RemoveItem(filename string, quantity int)
+
+Remove items from the current doodad's inventory.
+
+#### Self.HasItem(filename string) bool
+
+Tests if the item is in the inventory.
+
+#### Self.Inventory() map[string]int
+
+Returns the doodad's full inventory data, an object that maps filename strings
+to quantity integers.
+
+#### Self.ShowLayer(index int)
 
 Switch the active layer of the doodad to the layer at this index.
 
@@ -224,7 +361,7 @@ Self.ShowLayer(0);  // 0 is the first and default layer
 Self.ShowLayer(1);  // show the second layer instead
 ```
 
-### Self.ShowLayerNamed(name string)
+#### Self.ShowLayerNamed(name string)
 
 Switch the active layer by name instead of index.
 
@@ -241,7 +378,7 @@ order of file names passed in, with 0 being the first file:
 doodad convert door.png open-1.png open-2.png open-3.png my-door.doodad
 ```
 
-### Self.AddAnimation(name string, interval int, layers list)
+#### Self.AddAnimation(name string, interval int, layers list)
 
 Register a named animation for your doodad. `interval` is the time in
 milliseconds before going to the next frame. `layers` is an array of layer
@@ -260,7 +397,7 @@ Self.AddAnimation("open", 100, ["open-1", "open-2", "open-3"]);
 Self.AddAnimation("close", 100, [3, 2, 1]);
 ```
 
-### Self.PlayAnimation(name string, callback func())
+#### Self.PlayAnimation(name string, callback func())
 
 This starts playing the named animation. The callback function will be called
 when the animation has completed.
@@ -274,11 +411,11 @@ Self.PlayAnimation("open", function() {
 });
 ```
 
-### Self.IsAnimating() bool
+#### Self.IsAnimating() bool
 
 Returns true if an animation is currently being played.
 
-### Self.StopAnimation()
+#### Self.StopAnimation()
 
 Stops any currently playing animation.
 
@@ -292,7 +429,7 @@ Stops any currently playing animation.
   * Self.Doodad().GameVersion: the version of {{ app_name }} that was used
     when the doodad was created.
 
-### Self.Destroy()
+#### Self.Destroy()
 
 This destroys the current instance of the doodad as it appears in a level.
 
@@ -302,7 +439,7 @@ doodad instance should be destroyed and removed from the active level.
 
 -----
 
-## Console Logging
+### Console Logging
 
 Like in node.js and the web browser, `console.log` and friends are available
 for logging from a doodad script. Logs are emitted to the same place as the
@@ -318,12 +455,12 @@ console.error("Error-level messages");
 
 -----
 
-## Timers and Intervals
+### Timers and Intervals
 
 Like in a web browser, functions such as setTimeout and setInterval are
 supported in doodad scripts.
 
-### setTimeout(function, milliseconds int) int
+#### setTimeout(function, milliseconds int) int
 
 setTimeout calls your function after the specified number of milliseconds.
 
@@ -332,7 +469,7 @@ setTimeout calls your function after the specified number of milliseconds.
 Returns an integer "timeout ID" that you'll need if you want to cancel the
 timeout with clearTimeout.
 
-### setInterval(function, milliseconds int) int
+#### setInterval(function, milliseconds int) int
 
 setInterval calls your function repeatedly after every specified number of
 milliseconds.
@@ -340,76 +477,42 @@ milliseconds.
 Returns an integer "interval ID" that you'll need if you want to cancel the
 interval with clearInterval.
 
-### clearTimeout(id int)
+#### clearTimeout(id int)
 
 Cancels the timeout with the given ID.
 
-### clearInterval(id int)
+#### clearInterval(id int)
 
 Cancels the interval with the given ID.
 
 -----
 
-## Type Constructors
+### Type Constructors
 
 Some methods may need data of certain native types that aren't available in
 JavaScript. These global functions will initialize data of the correct types:
 
-### RGBA(red, green, blue, alpha uint8)
+#### RGBA(red, green, blue, alpha uint8)
 
 Creates a Color type from red, green, blue and alpha values (integers between
 0 and 255).
 
-### Point(x, y int)
+#### Point(x, y int)
 
 Creates a Point object with X and Y coordinates.
 
-### Vector(x, y float64)
+#### Vector(x, y float64)
 
 Creates a Vector object with X and Y dimensions.
 
 -----
 
-## Global Functions
-
-Some useful globally available functions:
-
-### EndLevel()
-
-This ends the current level, i.e. to be used by the goal flag.
-
-### Flash(message string, args...)
-
-Flash a message on screen to the user.
-
-Flashed messages appear at the bottom of the screen and fade out after a few
-moments. If multiple messages are flashed at the same time, they stack from the
-bottom of the window with the newest message on bottom.
-
-Don't abuse this feature as spamming it may annoy the player.
-
-### GetTick() uint64
-
-Returns the current game tick. This value started at zero when the game was
-launched and increments every frame while running.
-
-### time.Now() time.Time
-
-This exposes the Go standard library function `time.Now()` that returns the
-current date and time as a Go time.Time value.
-
-### time.Add(t time.Time, milliseconds int64) time.Time
-
-Add a number of milliseconds to a Go Time value.
-
---------
-
-## Event Handlers
+### Event Handlers
 
 Doodad scripts can respond to certain events using functions on the global
 `Events` variable.
 
-### Events.OnCollide( func(event) )
+#### Events.OnCollide( func(event) )
 
 OnCollide is called when another actor is colliding with your doodad's sprite
 box. The function is given a CollideEvent object which has the following
@@ -429,12 +532,15 @@ attributes:
   has special behavior when touched (i.e. a button that presses in), you should
   wait until Settled=true before running your handler for that.
 
-### Events.OnLeave( func(event) )
+#### Events.OnLeave( func(event) )
 
 Called when an actor that _was_ colliding with your doodad is no longer
 colliding (or has left your doodad's sprite box).
 
-### Events.RunKeypress( func(event) )
+The event argument is the same as OnCollide, with the Actor available
+and Settled=true (others left as default zero values).
+
+#### Events.RunKeypress( func(event) )
 
 Handle a keypress. `event` is an `event.State` from the render engine.
 
@@ -442,7 +548,7 @@ TODO: document that.
 
 -----
 
-## Pub/Sub Communication
+### Pub/Sub Communication
 
 Doodads in a level are able to send and receive messages to other doodads,
 either those that they are **linked** to or those that listen on a more
@@ -460,7 +566,7 @@ Doodads communicate in a "publisher/subscriber" model: one doodad publishes an
 event with a name and data, and other doodads subscribe to the named event to
 receive that data.
 
-### Official, Standard Pub/Sub Messages
+#### Official, Standard Pub/Sub Messages
 
 The following message names and data types are used by the game's default
 doodads. You're free to use these in your own custom doodads.
@@ -473,10 +579,11 @@ their custom event names.
 |------|-----------|--------------|
 | power | boolean | Communicates a "powered" (true) or "not powered" state, as in a Button to an Electric Door. |
 | broadcast:state-change | boolean | An "ON/OFF" button was hit and all state blocks should flip. |
+| broadcast:checkpoint | string | A checkpoint flag was reached. Value is the actor ID of the checkpoint flag. |
 | sticky:down | boolean | A sticky button is pressed Down. If linked to other normal buttons, it tells them to press down as well. Sends a `false` when the Sticky Button itself pops back up. |
 | switch:toggle | boolean | A switch has been toggled from on to off. |
 
-### Message.Publish(name string, data...)
+#### Message.Publish(name string, data...)
 
 Publish a named message to all of your **linked** doodads.
 
@@ -498,7 +605,7 @@ function main() {
 }
 ```
 
-### Message.Subscribe(name string, function)
+#### Message.Subscribe(name string, function)
 
 Subscribe to a named message from any **linked** doodads.
 
@@ -526,7 +633,7 @@ function main() {
 }
 ```
 
-### Message.Broadcast(name string, data...)
+#### Message.Broadcast(name string, data...)
 
 This publishes a named message to **every** doodad in the level, whether it
 was linked to the broadcaster or not.

@@ -1,5 +1,127 @@
 # Changes
 
+## v0.8.0 (September 4, 2021)
+
+This release brings some new features, new doodads, and new levels.
+
+New features:
+
+* **Checkpoints** for gameplay will ease the pain of dying to fire
+  pixels or Anvils by teleporting you back to the checkpoint instead
+  of resetting the whole level.
+* The **Doodad Properties** window while editing a doodad grants access
+  to many features which were previously only available via the
+  `doodad` tool, such as:
+    * Edit metadata like the Title and Author of your doodad
+    * Set the default hitbox of your doodad.
+    * Attach, open, and delete the JavaScript for your doodad
+    * Manage tags (key/value store) on your doodads: how you can
+      communicate settings to the JavaScript which can receive the
+      tags via `Self.GetTag("name")`
+* Some **Generic Doodad Scripts** are built in. Using only the in-game
+  tools, it is possible to create custom doodads which have some basic
+  in-game logic and you don't need to write any code. The generic
+  scripts include:
+    * Generic Solid: the hitbox is solid
+    * Generic Fire: its hitbox harms the player
+    * Generic Anvil: harmless, deadly when falling
+    * Generic Collectible Item: it goes in your inventory
+* **All Characters are Playable!** Use the Link Tool to connect your
+  Start Flag with another doodad on your level, and you will play
+  **as** that doodad when the level starts. The Creature doodads are
+  all intended to be fully functional; playing as buttons and doors
+  leads to strange results.
+
+New doodads have been added:
+
+* The **Anvil** is a heavy metal object which is affected by gravity.
+  It is harmless to collision, but if the anvil is in freefall, it
+  will destroy every mobile doodad that it touches, and is deadly
+  to the player character.
+* The **Electric Trapdoor** is a trapdoor that opens and closes when
+  powered by a button or switch. It is a horizontal version of the
+  Electric Door.
+* The **Thief** is a new character which will steal items from the
+  player or other mobile doodads. The Thief is able to pick up items
+  and unlock doors and he walks back and forth like the Azulians.
+* The **Blue Azulian** is now selectable from the Doodads menu. It
+  behaves like the Red Azulian but moves at half the speed. The
+  Azulians can pick up items and open doors.
+* The **Checkpoint Flag** will remember the player's spot in the level.
+  Dying to fire pixels or Anvils no longer forces a restart of the
+  level - you can resume from your last checkpoint, or the Start Flag
+  by default.
+
+New levels have been added:
+
+* **Castle.level:** introduces the new Thief character. Castle-themed
+  level showing off various new doodads.
+* **Thief 1.level:** a level where you play as the Thief! You need to
+  steal Small Keys from dozens of Azulians and even steal items back
+  from another Thief who has already stolen some of the keys.
+
+Some doodads have changed behavior:
+
+* The **Bird** can no longer pick up items, unless controlled by
+  the player character.
+* The **Anvil** and **Box** will reset to their original locations
+  if they receive a power signal from a linked button or switch.
+
+The user interface has been improved:
+
+* **Tabbed windows!** The Doodad Dropper window of the level editor
+  and the Settings window use new, tabbed interfaces.
+* **Doodad Categories:** the Doodad Dropper's tabs are divided into
+  a few major categories.
+    1. Objects: Anvil, Box, Crumbly Floor, and Flags
+    2. Doors: Doors, Trapdoors, and Keys
+    3. Gizmos: Buttons, Switches, Electric Doors, etc.
+    4. Creatures: Bird, Azulians, Thief
+    5. All: a classic view paging over all doodads (and doodads
+       not fitting any of the above categories).
+
+New functions are available in the JavaScript API for custom doodads:
+
+* FailLevel(message string): global function that kills the player
+  with a custom death message.
+* SetCheckpoint(Point): set the player respawn location
+* Self.MoveTo(Point(x, y int))
+* Self.IsPlayer() bool
+* Self.SetInventory(bool): turn on or off inventory. Keys and other
+  items will now only give themselves to mobile doodads which have
+  inventory.
+* Self.HasInventory() bool
+* Self.AddItem(filename string, quantity int) - zero quantity for
+  permanent items like the colored keys.
+* Self.RemoveItem(filename string, quantity int)
+* Self.HasItem(filename string)
+* Self.Inventory() map[string]int
+* Self.Hitbox() - also see Self.Hitbox.IsEmpty()
+
+The Events.OnLeave() callback now receives a CollideEvent argument,
+like OnCollide, instead of the useless actor ID string. Notable
+properties on the CollideEvent will be the .Actor which is leaving
+and Settled=true.
+
+Other miscellaneous changes:
+
+* The **Link Tool** can now un-link two doodads by clicking on
+  them again.
+* Actor UUIDs in your levels will now be Type 1 UUIDs (time-based)
+  instead of random. This will ensure each newly added doodad gets
+  a larger ID than the previous one, so in cases of draw order
+  conflicts or that sort of thing, the winner can be picked
+  deterministically (most recently added renders on top).
+* A **death barrier** will prevent Boy from falling forever on unbounded
+  maps should he somehow fall off the level. The death barrier is a
+  Y value 1,000 pixels below the lowest pixel on your map.
+* Mobile doodads no longer "moonwalk" when they change directions.
+* A new color is added to all default palettes: "hint" (pink) for
+  writing hint notes.
+* A maximum scroll speed on the "follow the player character" logic
+  makes for cooler animations when the character teleports around.
+* Levels and Doodads are now sorted on the Open menu.
+
 ## v0.7.2 (July 19 2021)
 
 This release brings some new features and some new content.

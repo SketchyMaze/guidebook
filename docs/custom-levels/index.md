@@ -79,18 +79,21 @@ with. The available options as of **version 0.6.0** are:
     2. **decoration**: light grey
     3. **fire**: red, fire
     4. **water**: blue, water
+    5. **hint**: pink
 * **Colored Pencil:** a new palette with some more varied default colors.
     1. **grass**: green, solid geometry
     2. **dirt**: brown, solid
     3. **stone**: dark grey, solid
     4. **fire**: red, fire
     5. **water**: light blue (#0099FF), water
+    6. **hint**: pink
 * **Blueprint:** the classic palette for levels with the Blueprint wallpaper:
     1. **solid**: white, solid
     2. **decoration:** light grey
     3. **fire**: light red (#FF5000), fire
     4. **water**: light blue (#0099FF), water
     5. **electric**: yellow, solid
+    6. **hint**: pink
 
 In earlier alpha versions of the game, the Blueprint palette was chosen by
 default when the level starts out with the Blueprint wallpaper, which has a
@@ -210,8 +213,8 @@ and a magenta box appears around it. Click on it, and then click on the other
 doodad to pair it to. A glowing magenta line will connect the two doodads
 together from then on, showing their connection.
 
-> **Note:** there seems to be no way to un-link two doodads once linked,
-> deleting one from your level and placing a new one will break the links.
+To disconnect a link between two doodads, click on the two of them again with
+the Link Tool - or delete and replace one of them.
 
 Linked doodads are able to send small messages to their linked partners when
 events happen to _them_. For example, when the player character steps on a button
@@ -316,10 +319,13 @@ Its options include:
     * Undo (Ctrl-Z)
     * Redo (Ctrl-Y)
     * Settings
-* **Level**
-    * Page settings (to change the level type or wallpaper)
+* **Level** _(only when editing a level)_
+    * Level Properties
     * Attached files
     * Playtest (P)
+* **Doodad** _(only when editing a doodad)_
+    * Doodad Properties
+    * Layers
 * **Tools**
     * Debug overlay (F3)
     * Command shell (Enter)

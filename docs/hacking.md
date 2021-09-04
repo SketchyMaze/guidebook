@@ -178,6 +178,22 @@ open the developer console and type:
 
     Removes all keys and items from the player's inventory.
 
+* `fly like a bird`
+
+    Play as the Bird by default on levels that don't specify a character.
+
+* `the cell`
+
+    Play as the Blue Azulian by default.
+
+* `play as thief`
+
+    Play as the Thief by default.
+
+* `pinocchio`
+
+    Play as the Boy (default) as the player character.
+
 ## JavaScript Shell
 
 The developer console also features a JavaScript shell, which exposes

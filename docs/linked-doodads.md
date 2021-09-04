@@ -20,6 +20,28 @@ Currently, the only way to _unlink_ two doodads is to delete one of them. With t
 
 This section describes how the built-in doodads interact with one another when they're linked, and some example use cases. Custom doodads made by users should follow similar patterns; check the [PubSub event types](custom-doodads/scripts.md#official-standard-pub-sub-messages) used by built-in doodads, or invent your own custom event types!
 
+### Start Flag
+
+Link it with **any one doodad** and the that doodad will be the player
+character for this level.
+
+It is considered an error to link more than one doodad to the Start Flag.
+It is undefined behavior which doodad "wins" in that case.
+
+Upon level start, all actors linked to the Start Flag are destroyed.
+
+### Anvil
+
+If the Anvil receives **power** from any linked Button or Switch, it will teleport
+back to its original starting location on the level. With this, players can make
+a "Reset Button" for puzzle levels.
+
+### Box
+
+If the Box receives **power** from any linked Button or Switch, it will teleport
+back to its original starting location on the level. With this, players can make
+a "Reset Button" for puzzle levels.
+
 ### Buttons
 
 Quick reference:
@@ -80,6 +102,15 @@ The technicals:
     * If the sender is saying **power** (true), the door will open.
     * If the sender is saying **power** (false), the door will close.
     * If the sender is a Switch, this message is ignored in favor of the toggle behavior.
+
+### Electric Trapdoor
+
+The Electric Trapdoor is basically a horizontal version of the
+[Electric Door](#electric-door).
+
+* Opens when it receives power from a Button, closes when power is removed.
+* Always toggles state when powered from a Switch regardless of the Switch's
+  actual power status.
 
 ### Warp Doors
 

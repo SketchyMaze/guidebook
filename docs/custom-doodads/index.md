@@ -13,6 +13,33 @@ image editor. Then, you can program their behavior using JavaScript to make them
 * Program its Behavior
     * [JavaScript](scripts.md)
 
+## In-game Doodad Editor
+
+The in-game level editor can be used to create custom doodads. As of
+Sketchy Maze v0.8.0, doodads can be authored entirely in-game without
+needing to use the `doodad` command-line tool.
+
+![Screenshot of the Doodad editor](../images/doodad-editor.png)
+
+See [Drawing Doodads](edit-in-game.md) for details.
+
+## Using external editors
+
+You may find it more comfortable to draw your doodads in an external
+image editor. All of the game's built-in doodads were drawn in The GIMP.
+The `doodad` command-line tool that ships with the game is able to convert
+a series of PNG images into a doodad, attach a JavaScript, set tags, and
+so on.
+
+See [External Editors for Doodads](edit-external.md)
+
+## Example Doodads
+
+There are some example custom doodads you can check out at
+<https://code.sketchymaze.com/declassified/doodads>. There you will find
+example custom doodads to make your own player characters, Warp Doors,
+and more.
+
 ## Naming Convention
 
 It is strongly encouraged that you name your custom doodad files with a
@@ -29,6 +56,30 @@ than yourself.
 
 Future versions of the game will likely prevent saving a new doodad with
 the same filename of a built-in one.
+
+## Categories
+
+The in-game Doodad Dropper window of the level editor shows a categorical
+view of doodads: Objects, Doors, Gizmos, Creatures, and All.
+
+Categories are managed by setting custom tags on your .doodad file, which
+can be done by the [doodad tool](../doodad-tool.md) like so:
+
+```bash
+doodad edit-doodad --tag "category=objects" example.doodad
+```
+
+The "category" tag should hold a lowercase value. Only supported categories
+are recognized, which include: objects, doors, gizmos, creatures.
+
+A doodad can appear under multiple categories by joining them with a comma:
+
+```bash
+doodad edit-doodad --tag "category=doors,gizmos" example.doodad
+```
+
+Every doodad also appears in the "All" tab. In the future, custom tags will
+be editable using in-game UI when creating a custom doodad.
 
 ## Profile Directory
 
