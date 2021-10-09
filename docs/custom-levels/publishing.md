@@ -72,6 +72,33 @@ Doodads can be removed from the Attached Files list **if:**
 * The doodad is no longer used in your level, e.g. you have removed every instance
   of the doodad from your level geometry.
 
+In case you can't locate the doodad to remove it from your level, the
+[`doodad` tool](../doodad-tool.md) can remove doodads from your level
+by name or ID:
+
+```bash
+# Show details of all the actors in this level;
+# look for the Actors section of the output.
+$ doodad show --actors example.level
+...
+Actors:
+  Level contains 16 actors
+  List of Actors:
+  -  Name: key-blue.doodad
+     UUID: 15f09c12-5d00-4654-9725-8e1ba10004d7
+       At: 362,1348
+  -  Name: trapdoor-down.doodad
+     UUID: 24f85095-d13c-42e2-9156-01cb4b84723c
+       At: 897,398
+  -  Name: crumbly-floor.doodad
+     UUID: 9ba40fc2-acc7-4e6d-821a-f0248c2ad7e1
+       At: 1243,1742
+...
+
+# Remove all instances of a doodad by name
+$ doodad edit-level --remove-actor crumbly-floor.doodad example.level
+```
+
 ### Removing Attached Wallpapers
 
 Similarly: if the level is using a custom wallpaper image, you can not remove

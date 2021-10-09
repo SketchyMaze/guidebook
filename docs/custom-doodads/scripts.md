@@ -1,43 +1,33 @@
 # Doodad Scripts
 
 Doodads are programmed using (ES5) JavaScript which gives them their behavior
-and ability to interact with the player and other doodads.
+and ability to interact with the player and other doodads. Doodad scripts are
+run during "Play Mode" when a level _containing_ the doodad is being played.
 
-Doodad scripts are run during "Play Mode" when a level _containing_ the doodad
-is being played. You can install a JavaScript (.js) file into a doodad using
-the `doodad` [command line program](../doodad-tool.md) that
-shipped with your game:
-
-```bash
-> doodad install-script index.js filename.doodad
-```
-
-An example Doodad script looks like the following:
+The main() function of your script is called to initialize your doodad. Here
+is an example what a doodad script may look like:
 
 ```javascript
-// main() is called on level initialization for each
-// instance ("actor") of the doodad.
 function main() {
     // Logs go to the game's log file (standard output on Linux/Mac).
     console.log("%s initialized!", Self.Title);
 
-    // If our doodad has 'solid' parts that should prohibit movement,
-    // define the hitbox here. Coordinates are relative so 0,0 is the
-    // top-left pixel of the doodad's sprite.
+    // NOTE: you can configure the hitbox in the editor, this function
+    // can define it in script. This box marks the region you want to
+    // be 'solid' or whatever, the hot spot of your doodad.
     Self.SetHitbox(0, 0, 64, 12);
 
     // Handle a collision when another doodad (or player) has entered
-    // the space of our doodad.
+    // the space of our doodad. The `e` has info about the event.
     Events.OnCollide(function(e) {
-        // The `e` object holds information about the event.
         console.log("Actor %s has entered our hitbox!", e.Actor.ID());
 
         // InHitbox is `true` if we defined a hitbox for ourselves, and
         // the colliding actor is inside of the hitbox we defined.
+        // To prohibit movement, return false from the OnCollide handler.
+        // If you don't return false, the actor is allowed to keep on
+        // moving through.
         if (e.InHitbox) {
-            // To prohibit movement, return false from the OnCollide handler.
-            // If you don't return false, the actor is allowed to keep on
-            // moving through.
             return false;
         }
 
@@ -49,6 +39,14 @@ function main() {
             Message.Publish("power", true);
         }
     });
+
+    // Subscribe to "broadcast:ready" and don't publish messages
+    // until the game is ready!
+    Message.Subscribe("broadcast:ready", function() {
+        // It is now safe to publish messages to linked doodads, something that
+        // could have deadlocked otherwise!
+        Message.Publish("ping", null);
+    })
 
     // OnLeave is called when an actor, who was previously colliding with
     // us, is no longer doing so.
@@ -288,6 +286,15 @@ Self.SetVelocity( Velocity(3.2, 7.0) );
 A positive X velocity propels the doodad to the right. A positive Y velocity
 propels the doodad downward.
 
+#### Self.GetVelocity() Velocity
+
+**New in v0.9.0**
+
+Returns the current velocity of the doodad.
+
+Note: for playable characters, velocity is currently managed by the
+game engine.
+
 #### Self.SetMobile(bool)
 
 Call `SetMobile(true)` if the doodad will move on its own.
@@ -316,6 +323,12 @@ Self.SetGravity(true);
 // HasGravity to check.
 console.log(Self.HasGravity()); // true
 ```
+
+#### Self.Hide(), Self.Show()
+
+**New in v0.9.0**
+
+Hide the current doodad to make it invisible and Show it again.
 
 #### Self.SetInventory(bool)
 
@@ -578,6 +591,7 @@ their custom event names.
 | Name | Data Type | Description |
 |------|-----------|--------------|
 | power | boolean | Communicates a "powered" (true) or "not powered" state, as in a Button to an Electric Door. |
+| broadcast:ready | (none) | The level is ready and it is now safe for doodads to publish messages to others. |
 | broadcast:state-change | boolean | An "ON/OFF" button was hit and all state blocks should flip. |
 | broadcast:checkpoint | string | A checkpoint flag was reached. Value is the actor ID of the checkpoint flag. |
 | sticky:down | boolean | A sticky button is pressed Down. If linked to other normal buttons, it tells them to press down as well. Sends a `false` when the Sticky Button itself pops back up. |

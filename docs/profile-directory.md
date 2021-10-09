@@ -7,7 +7,7 @@ This will typically be found at the following locations based on your platform:
 
 * **Windows:** `%APPDATA%` or `C:\Users\%USER%\AppData\Roaming\doodle`
 * **Mac OS:** `$HOME/Library/Application Support/doodle`
-* **GNU/Linux:** `$XDG_CONFIG_HOME` or `$HOME/.config/doodle`
+* **GNU/Linux:** `$XDG_CONFIG_HOME/doodle` or `$HOME/.config/doodle`
 * **Linux (Flatpak):** `$HOME/.var/app/com.sketchymaze.Doodle/config/doodle`
 
 ## Opening your Profile Directory

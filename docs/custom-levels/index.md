@@ -105,6 +105,13 @@ If you're using the Blueprint wallpaper, pick the Colored Pencil or Blueprint
 palettes for best results: the default black color for level geometry won't
 show well on the Blueprint wallpaper!
 
+### Title and Author
+
+After you start editing your level, access the "Level -> Level
+Properties" menu to reopen the level settings and you will find the
+options to edit the Title of your level and change the Author name
+if you like. The default author copies your OS username.
+
 ## Editor Interface
 
 ![Level Editor View](../images/newlevel-2.png)
@@ -223,6 +230,18 @@ When the button is released, it sends a "power off" signal and the door closes.
 
 See the [Doodads](../doodads.md) page for a description of the game's built-in
 doodads and how they interact with each other.
+
+---
+
+## Giant Screenshot
+
+From the level editor it is possible to create a "Giant Screenshot" of
+your whole entire level and save it as a PNG image. Access this feature
+by clicking on the "Level->Giant screenshot" menu of the editor.
+
+Screenshots are saved in your [profile directory](../profile-directory.md)
+in the 'screenshots' folder; there is a shortcut in the Level menu
+to open the screenshots folder in your file browser.
 
 ---
 

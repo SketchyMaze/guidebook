@@ -38,4 +38,13 @@ do the job and you can draw whatever shape you want for your level hazards.
 
 While the game ships with a [handful of built-in doodads](doodads.md) to
 spice up your level, you can also create your own and program them to do
-whatever you want, with JavaScript!
+whatever you want, [with JavaScript](custom-doodads/scripts.md)!
+
+The game also has a few "generic" scripts built in that you can choose from,
+to create your own simple doodads with no programming required! In the future,
+template doodads can be created to be able to draw custom player characters,
+Warp Doors and other complex doodads with a script already attached.
+
+Full versions of the game let you bundle custom doodads _inside_ of your
+custom levels for easy sharing to other players. Custom wallpaper images embed
+in a level file for all versions of the game.

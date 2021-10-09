@@ -102,6 +102,10 @@ The following commands are supported:
 
     Flashes your custom message on the bottom of the screen.
 
+* `error <message>`
+
+    Flash your message in the error color.
+
 * `alert <message>`
 
     Pop up an alert box modal with a custom message.
@@ -170,6 +174,13 @@ open the developer console and type:
     will also enable antigravity, otherwise you would fall to the
     bottom of the level.
 
+* `show all actors`
+
+    Run this during Play Mode to make all invisible actors visible. For
+    example, you'll be able to see all of the Technical Doodads which
+    normally turn themselves invisible, or you can reveal the player
+    character during Warp Door transitions.
+
 * `give all keys`
 
     Gives all four colored keys to the player.
@@ -208,7 +219,7 @@ line of JavaScript code.
 >$ 2 + 2
 4
 >$ d.Flash("This is %s", d.Title())
-This is Project: Doodle v0.4.0-alpha
+This is Sketchy Maze v0.9.0
 ```
 
 The following native objects are exposed to the JavaScript shell:
@@ -217,6 +228,7 @@ The following native objects are exposed to the JavaScript shell:
 * `function RGBA(red, green, blue, alpha uint8)` creates a native
   Color type, each value is range 0 to 255
 * `function Point(x, y int)` creates a native Point type.
+* `function Vector(x, y float64)` creates a native Vector type.
 * `function Rect(x, y, w, h int)` creates a native Rect type.
 * `function Tree(ui.Widget)` prints a tree of UI widgets drawn on the
   screen -- if you can find the widgets somewhere under `d`

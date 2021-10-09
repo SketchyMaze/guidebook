@@ -41,6 +41,12 @@ linked together in your levels.
     * [State Button](#state-button)
     * [State Blocks](#state-blocks)
     * [Blue & Orange Warp Doors](#blue-orange-warp-doors)
+* [Technical Doodads](#technical-doodads)
+    * [Goal Region](#goal-region)
+    * [Checkpoint Region](#checkpoint-region)
+    * [Fire Region](#fire-region)
+    * [Power Source](#power-source)
+    * [Stall Player](#stall-player)
 
 ---
 
@@ -420,3 +426,50 @@ a de-activated door.
 
 The **Blue Warp Door** is active at the same time as the **Blue State Blocks**,
 and vice versa for the **Orange Warp Door.**
+
+---
+
+## Technical Doodads
+
+"Technical" doodads tend to turn invisible during gameplay and have some useful
+interactions for certain situations.
+
+### Goal Region
+
+![Goal Region](images/doodads/goal-region.png)
+
+This doodad acts like an invisible Exit Flag, winning the level if touched by
+a player character.
+
+### Checkpoint Region
+
+![Checkpoint Region](images/doodads/checkpoint-region.png)
+
+This doodad acts like an invisible Checkpoint Flag, recording the player's
+progress in a level.
+
+### Fire Region
+
+![Fire Region](images/doodads/fire-region.png)
+
+This doodad will trigger the fail condition if touched by the player.
+
+### Power Source
+
+![Power Source](images/doodads/power-source.png)
+
+On level start, this doodad emits a `power(true)` signal to all linked doodads.
+Connect it to an Electric Door, for example, and the door will open immediately
+when the level begins.
+
+### Stall Player
+
+![Stall Player](images/doodads/stall-player.png)
+
+This doodad will freeze the player character for 250ms, one time. It is useful
+if you need to slow down the player to get some timing in your level to work
+out.
+
+If this doodad receives power from a linked button, it will reset the trap,
+and will freeze the player again for 250ms should they make contact with the
+doodad again.

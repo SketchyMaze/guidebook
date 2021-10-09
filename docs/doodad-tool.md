@@ -212,6 +212,47 @@ Available properties that can be modified are as follows:
     * `--wallpaper name.png`: set the wallpaper image filename.
     * `--lock, --unlock`: edit the Locked attribute on a level. Locked levels
       can not be opened for editing in-game.
+    * `--remove-actor <name or id>`: remove an actor from your level by its name
+      or its UUID. For example: `--remove-actor trapdoor.doodad` removes every
+      instance of trapdoor.doodad from the level geometry.
+
+---
+
+### Remove actors from your level
+
+In case you inherit a level that needs custom doodads that you don't have, you'll
+get errors in the level editor about the missing doodads. One way to remedy this
+is to delete the offending doodads from the map, but you can't do this in the
+editor because the doodads don't have a sprite in your map.
+
+First, use the `doodad show --actors example.level` command and look for the
+Actors segment of the result, e.g.:
+
+```bash
+$ doodad show --actors example.level
+...
+Actors:
+  Level contains 16 actors
+  List of Actors:
+  -  Name: key-blue.doodad
+     UUID: 15f09c12-5d00-4654-9725-8e1ba10004d7
+       At: 362,1348
+  -  Name: trapdoor-down.doodad
+     UUID: 24f85095-d13c-42e2-9156-01cb4b84723c
+       At: 897,398
+  -  Name: crumbly-floor.doodad
+     UUID: 9ba40fc2-acc7-4e6d-821a-f0248c2ad7e1
+       At: 1243,1742
+...
+```
+
+You can then delete these actors by either their Name (filename) or their UUID
+value. Deleting by name means that all instances of that doodad will be removed
+from the map.
+
+```bash
+$ doodad edit-level --remove-actor crumbly-floor.doodad example.level
+```
 
 ---
 

@@ -36,6 +36,8 @@ from the other three quadrants when decorating these edges of the level:
 * **Tiled Left:** the left margin of the page; tiled vertically across the entire
   left edge of the level.
 
+![Screenshot of how the wallpaper gets tiled out](../images/custom-wallpaper-ex.png)
+
 ## Making a Simple Tiled Wallpaper
 
 If you already have a tiled pattern you want to use as a wallpaper, and want
