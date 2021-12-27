@@ -19,6 +19,20 @@ live.
 
 To install custom content created by other players, copy them into these folders.
 
+## Contents of your Profile Directory
+
+There are a few interesting folders:
+
+* **levels:** This is where your user-created .level files are saved to. You can
+  also copy levels made by other players into this folder.
+* **doodads:** This is where your custom doodads go. You can copy doodads made by
+  other players here and use them in your own levels.
+* **levelpacks:** This is where you can place custom [Level Packs](custom-levels/levelpacks.md).
+  You can create your own or download packs created by other players and place them
+  in this folder.
+* **screenshots:** the Giant Screenshot feature of the level editor will place its
+  generated pictures here.
+
 ## See Also
 
 * [Publishing Levels](custom-levels/publishing.md): embed custom doodads directly
