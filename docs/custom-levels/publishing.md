@@ -10,12 +10,12 @@ easy sharing with others: another player can download _just_ your `.level` file
 and it will "just play" in their copy of the game, and they don't need to track
 down all the same custom doodads you've used.
 
-> <em>**Notice:** This feature is only available for full (registered) versions of the
-> game. The free (shareware) version of </em>Sketchy Maze<em> supports custom levels
+> <em>**Notice:** This feature is only available to [registered](../register.md)
+> copies of the game. The free (shareware) version of <em>Sketchy Maze</em> supports custom levels
 > and doodads, but you would need to copy the custom `.doodad` files to each
 > computer your level will play on, otherwise the game won't be able to find
-> them! Check [the website](https://www.sketchymaze.com/) for details how to acquire
-> a full version of the game.</em>
+> them! See [here](../register.md) for details how to acquire a full version of
+> the game.</em>
 
 ## Publish a Level
 

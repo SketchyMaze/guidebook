@@ -27,7 +27,7 @@ Custom doodads:
   by its levels. Instead of each level needing to [publish](publishing.md) (embed) its
   doodads individually, the level pack holds onto them so multiple levels can use them
   while saving on disk space!
-* **Note:** Free (shareware) versions of the game fully support custom Level Packs, but they don't
+* **Note:** [Free (shareware)](../register.md) versions of the game fully support custom Level Packs, but they don't
   support embedded custom doodads. Level Packs that use only the built-in doodads work
   perfectly, and in case you're using custom doodads, the player may manually install the
   custom doodads in their [profile directory](../profile-directory.md) and play it that way.
@@ -88,7 +88,7 @@ files to exist in the levelpack which _are not_ described in the index.json; the
 will not be reachable in-game but in the future this may support hiding bonus levels linked
 to by other levels in the pack.
 
-**Note:** the game does not yet do anything with the `doodads` folder. In the future, this
+**TO DO:** the game does not yet do anything with the `doodads` folder. In the future, this
 folder will help a group of levels embed a custom doodad _once_ in the levelpack instead of
 each keeping a separate copy.
 

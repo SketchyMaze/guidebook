@@ -1,6 +1,57 @@
 # Changes
 
-## v0.9.0 (TBD)
+## v0.10.0 (Dec 30 2021)
+
+New features and changes:
+
+* **Level Packs:** you can group a set of levels into a sequential
+  adventure. The game's built-in levels have been migrated into Level
+  Packs and users can create their own, too!
+* **Crosshair Option:** in the level editor you can have a crosshair
+  drawn at your cursor position, which may help align things while
+  making a level. Find the option in the game's Settings window.
+* **Smaller Palette Colors:** the color buttons in the Level Editor are
+  smaller and fit two to a row. This allows for more colors but may be
+  difficult for touch controls.
+* Doodad AI updates: the **Bird** records its original altitude and will
+  attempt to fly back there when it can, so in case it slid up or down a
+  ramp it will correct its height when it comes back the other way.
+* The "New Level" and "New Doodad" functions on the main menu are
+  consolidated into a window together that can create either, bringing
+  a proper UI to creating a doodad.
+* Added a setting to **hide touch control hints** from Play Mode.
+* The title screen is more adaptive to mobile. If the window height isn't
+  tall enough to show the menu, it switches to a 'landscape mode' layout.
+* Adds a custom icon to the application window.
+
+A few notes about level packs:
+
+* A levelpack is basically a zip file containing levels and custom
+  doodads. **Note:** the game does not yet handle the doodads folder
+  of a levelpack at all.
+* The `doodad` command-line tool can create .levelpack files. See
+  `doodad levelpack create --help`. This is the easiest way to
+  generate the `index.json` file.
+* In the future, a .levelpack will be able to hold custom doodads on
+  behalf of the levels it contains, de-duplicating files and saving
+  on space. Currently, the levels inside your levelpack should embed
+  their own custom doodads each.
+* Free (shareware) editions of the game can create and play custom
+  level packs that use only the game's built-in doodads. Free versions
+  of the game can't play levels with embedded custom doodads. You can
+  always copy custom .doodad files into your profile directory though!
+
+Bugs fixed:
+
+* Undo/Redo now works again for the Doodad Editor.
+* Fix crash when opening the Doodad Editor (v0.9.0 regression).
+* The Play Level/Edit Drawing window is more responsive to small screens
+  and will draw fewer columns of filenames.
+* Alert and Confirm popup modals always re-center themselves, especially
+  to adapt to the user switching from Portrait to Landscape orientation
+  on mobile.
+
+## v0.9.0 (Oct 9, 2021)
 
 New features:
 

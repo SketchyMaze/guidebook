@@ -72,7 +72,7 @@ lines pattern. The page types and their effect on the wallpapers are:
 ### Default Palette
 
 When starting a **new** level, you may choose a default Palette to start out
-with. The available options as of **version 0.6.0** are:
+with. The available options as of **version 0.10.0** are:
 
 * **Default:** the classic palette from previous alpha game releases.
     1. **solid**: black, solid geometry
@@ -81,12 +81,14 @@ with. The available options as of **version 0.6.0** are:
     4. **water**: blue, water
     5. **hint**: pink
 * **Colored Pencil:** a new palette with some more varied default colors.
-    1. **grass**: green, solid geometry
-    2. **dirt**: brown, solid
-    3. **stone**: dark grey, solid
-    4. **fire**: red, fire
-    5. **water**: light blue (#0099FF), water
-    6. **hint**: pink
+    1. **darkstone**: dark grey, solid geometry
+    2. **grass**: green, solid
+    3. **dirt**: brown, solid
+    4. **stone**: grey, solid
+    5. **sandstone**: orangey, solid
+    6. **fire**: red, fire
+    7. **water**: light blue (#0099FF), water
+    8. **hint**: pink
 * **Blueprint:** the classic palette for levels with the Blueprint wallpaper:
     1. **solid**: white, solid
     2. **decoration:** light grey
@@ -317,46 +319,3 @@ color code; the extra two digits control the transparency between 00 (fully
 invisible) and FF (fully opaque).
 
 ![Enter an RGBA color value for see-thru colors](../images/palette-rgba.png)
-
----
-
-## Menu Bar
-
-While editing a level or doodad, a Menu Bar appears at the top of the screen.
-Its options include:
-
-* **File**
-    * New level (Ctrl-N)
-    * New doodad
-    * Save (Ctrl-S)
-    * Save as...
-    * Publish level (attach custom doodads for easy sharing)
-    * Open... (Ctrl-O)
-    * Close level
-    * Quit (Escape)
-* **Edit**
-    * Undo (Ctrl-Z)
-    * Redo (Ctrl-Y)
-    * Settings
-* **Level** _(only when editing a level)_
-    * Level Properties
-    * Attached files
-    * Playtest (P)
-* **Doodad** _(only when editing a doodad)_
-    * Doodad Properties
-    * Layers
-* **Tools**
-    * Debug overlay (F3)
-    * Command shell (Enter)
-    * Edit Palette
-    * Pencil Tool (f)
-    * Line Tool (L)
-    * Rectangle Tool (r)
-    * Ellipse Tool (c)
-    * Eraser Tool (x)
-    * Doodads (d)
-    * Link Tool
-* **Help**
-    * User Manual (F1)
-    * Register
-    * About

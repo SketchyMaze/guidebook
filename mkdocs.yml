@@ -17,6 +17,7 @@ nav:
   - Shortcut Keys: hotkeys.md
   - "`doodad` Program": doodad-tool.md
   - Hacking: hacking.md
+  - Register Your Game: register.md
   - Open Source Licenses: licenses.md
 theme: readthedocs
 markdown_extensions:
