@@ -14,15 +14,15 @@ linked together in your levels.
 
 * [Objects](#objects)
     * [Start Flag](#start-flag) - Spawn point of a level
-    * [Checkpoint Flag](#checkpoint-flag) - **NEW in v0.8.0**
+    * [Checkpoint Flag](#checkpoint-flag)
     * [Exit Flag](#exit-flag) - Goal of a level
-    * [Anvil](#anvil) - **NEW in v0.8.0**
+    * [Anvil](#anvil)
     * [Box](#box)
 * [Creatures](#creatures)
     * [Boy](#boy) - The player character
     * [Red Bird](#red-bird)
     * [Azulians](#azulians)
-    * [Thief](#thief) - **NEW in v0.8.0**
+    * [Thief](#thief)
 * [Doors & Trapdoors](#doors-trapdoors)
     * [Colored Locked Doors & Keys](#colored-locked-doors-keys)
     * [Small Key Doors](#small-key-doors)
@@ -47,6 +47,7 @@ linked together in your levels.
     * [Fire Region](#fire-region)
     * [Power Source](#power-source)
     * [Stall Player](#stall-player)
+    * [Invisible Warp Door](#invisible-warp-door) - **NEW in v0.10.1**
 
 ---
 
@@ -273,6 +274,11 @@ shut and the player character exits from the other door.
 If a Warp Door is not linked to another door, a message will display indicating
 that the door is "locked" and it can not be entered by the player.
 
+**New in v0.10.1:** a Warp Door may only be opened by the player while the player
+is touching the ground (unless under the effects of antigravity, or while playing
+as the Bird). A door that is sufficiently up in the air requiring the player to
+jump or to fall past it can _not_ be opened by the player while in mid-air.
+
 **See also:** the [Blue & Orange Warp Doors](#blue-orange-warp-doors) tied to the
 [State Blocks](#state-blocks).
 
@@ -427,6 +433,11 @@ a de-activated door.
 The **Blue Warp Door** is active at the same time as the **Blue State Blocks**,
 and vice versa for the **Orange Warp Door.**
 
+**New in v0.10.1:** a Warp Door may only be opened by the player while the player
+is touching the ground (unless under the effects of antigravity, or while playing
+as the Bird). A door that is sufficiently up in the air requiring the player to
+jump or to fall past it can _not_ be opened by the player while in mid-air.
+
 ---
 
 ## Technical Doodads
@@ -473,3 +484,11 @@ out.
 If this doodad receives power from a linked button, it will reset the trap,
 and will freeze the player again for 250ms should they make contact with the
 doodad again.
+
+### Invisible Warp Door
+
+![Invisible Warp Door](images/doodads/invisible-warp-door.png)
+
+This doodad acts just like the [Warp Doors](#warp-doors) but is invisible.
+Pressing the 'Use' key while grounded will activate the door and send you
+to the door it is linked to (if one exists).

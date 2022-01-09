@@ -140,6 +140,30 @@ current date and time as a Go time.Time value.
 
 Add a number of milliseconds to a Go Time value.
 
+#### time.Since(time.Time) time.Duration
+
+**New in v0.10.1**
+
+Get the duration since a time. Example:
+
+```javascript
+var now = time.Now()
+
+// later
+if (time.Since(now) > 5 * time.Minute) {
+    // 5 minutes have passed
+}
+```
+
+The `time` global exposes the following duration intervals as seen in the
+above example:
+
+* time.Hour
+* time.Minute
+* time.Second
+* time.Millisecond
+* time.Microsecond
+
 --------
 
 ### Self

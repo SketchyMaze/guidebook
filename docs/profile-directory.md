@@ -33,6 +33,19 @@ There are a few interesting folders:
 * **screenshots:** the Giant Screenshot feature of the level editor will place its
   generated pictures here.
 
+And some interesting files:
+
+* **settings.json:** holds your game settings and is unique to your installation
+  of the game.
+* **savegame.json:** holds your progress through Story Mode level packs including
+  high scores on the levels.
+* **license.key:** if you have [registered the game](register.md) this is a copy of
+  your license key file.
+
+Note: to back up your savegame.json you must also copy the settings.json file, or
+otherwise the game will not accept the savegame.json if the settings file doesn't
+"match" it.
+
 ## See Also
 
 * [Publishing Levels](custom-levels/publishing.md): embed custom doodads directly
