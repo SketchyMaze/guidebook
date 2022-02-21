@@ -15,6 +15,7 @@ nav:
   - Creating Custom Doodads: custom-doodads/index.md
   - Drawing Doodads: custom-doodads/edit-in-game.md
   - Doodad Scripts: custom-doodads/scripts.md
+  - Script API Reference: custom-doodads/api-reference.md
   - Shortcut Keys: hotkeys.md
   - "`doodad` Program": doodad-tool.md
   - Hacking: hacking.md

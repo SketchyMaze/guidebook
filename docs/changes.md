@@ -1,5 +1,100 @@
 # Changes
 
+## v0.11.0 (Feb 21 2022)
+
+New features:
+
+* **Game Controller** support has been added! The game can now be played
+  with an Xbox style controller, including Nintendo Pro Controllers. The
+  game supports an "X Style" and "N Style" button layout, the latter of
+  which swaps the A/B and the X/Y buttons so gameplay controls match the
+  button labels in your controller.
+* The **JavaScript Engine** for doodad scripts has been switched from
+  github.com/robertkrimen/otto to github.com/dop251/goja which helps
+  "modernize" the experience of writing doodads. Goja supports many
+  common ES6 features already, such as:
+    * Arrow functions
+    * `let` and `const` keywords
+    * Promises
+    * for-of loops
+* The **JavaScript API** has been expanded with new functions and
+  many of the built-in Creatures have gotten an A.I. update.
+* For full versions of the game, the **Publish Level** function is now
+  more streamlined to just a checkbox for automatically bundling your
+  doodads next time you save the level.
+
+New levels:
+
+* **The Zoo:** part of the Tutorial levelpack, it shows off all of the
+  game's built-in doodads and features a character selection room to
+  play as different creatures.
+* **Shapeshifter:** a new level on the First Quest where you switch
+  controls between the Boy, Azulian and the Bird in order to clear the
+  level.
+
+Some of the built-in doodads have updates to their A.I. and creatures
+are becoming more dangerous:
+
+* The **Bird** now searches for the player diagonally in front of
+  it for about 240px or so. If spotted it will dive toward you and
+  it is dangerous when diving! When _playing_ as the bird, the dive sprite
+  is used when flying diagonally downwards. The player-controlled bird
+  can kill mobile doodads by diving into them.
+* The **Azulians** will start to follow the player when you get
+  close and they are dangerous when they touch you -- but not if
+  you're the **Thief.** The red Azulian has a wider search radius,
+  higher jump and faster speed than the blue Azulian.
+* A new **White Azulian** has been added to the game. It is even faster
+  than the Red Azulian! And it can jump higher, too!
+* The **Checkpoint Flag** can now re-assign the player character when
+  activated! Just link a doodad to the Checkpoint Flag like you do the
+  Start Flag. When the player reaches the checkpoint, their character
+  sprite is replaced with the linked doodad!
+* The **Anvil** is invulnerable -- if the player character is the Anvil
+  it can not die by fire or hostile enemies, and Anvils can not destroy
+  other Anvils.
+* The **Box** is also made invulnerable so it can't be destroyed by a
+  player-controlled Anvil or Bird.
+
+New functions are available on the JavaScript API for doodads:
+
+* `Actors.At(Point) []*Actor`: returns actors intersecting a point
+* `Actors.FindPlayer() *Actor`: returns the nearest player character
+* `Actors.New(filename string)`: create a new actor (NOT TESTED YET!)
+* `Self.Grounded() bool`: query the grounded status of current actor
+* `Actors.SetPlayerCharacter(filename string)`: replace the nearest
+  player character with the named doodad, e.g. "boy.doodad"
+* `Self.Invulnerable() bool` and `Self.SetInvulnerable(bool)`: set a
+  doodad is invulnerable, especially for the player character, e.g.
+  if playing as the Anvil you can't be defeated by mobs or fire.
+
+New cheat codes:
+
+* `god mode`: toggle invincibility. When on, fire pixels and hostile
+  mobs can't make you fail the level.
+* `megaton weight`: play as the Anvil by default on levels that don't
+  specify a player character otherwise.
+
+Other changes:
+
+* When respawning from a checkpoint, the player is granted 3 seconds of
+  invulnerability; so if hostile mobs are spawn camping the player, you
+  don't get soft-locked!
+* The draw order of actors on a level is now deterministic: the most
+  recently added actor will always draw on top when overlapping another,
+  and the player actor is always on top.
+* JavaScript exceptions raised in doodad scripts will be logged to the
+  console instead of crashing the game. In the future these will be
+  caught and presented nicely in an in-game popup window.
+* When playing as the Bird, the flying animation now loops while the
+  player is staying still rather than pausing.
+* The "Level" menu in Play Mode has options to restart the level or
+  retry from last checkpoint, in case a player got softlocked.
+* When the game checks if there's an update available via
+  <https://download.sketchymaze.com/version.json> it will send a user
+  agent header like: "Sketchy Maze v0.10.2 on linux/amd64" sending only
+  static data about the version and OS.
+
 ## v0.10.1 (Jan 9 2022)
 
 New features:

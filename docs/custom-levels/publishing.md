@@ -1,7 +1,7 @@
 # Publishing Levels
 
 Sketchy Maze is designed to be _very_ friendly to mods and custom user content,
-and the **Publish Level** feature is an important part towards that goal.
+and the **Level Publishing** feature is an important part towards that goal.
 
 When you have created your own level and you have added some
 [custom doodads](../custom-doodads/index.md) to it, **publishing** your level
@@ -19,21 +19,21 @@ down all the same custom doodads you've used.
 
 ## Publish a Level
 
-When you are ready to share your level, click on the "File->Publish level" menu
+When you are ready to share your level, click on the "Level->Publish" menu
 option in the Level Editor.
 
 ![Publish Window screenshot](../images/publish.png)
 
-The Publish window will show the list of named doodads which currently exist in
-your level, designating which doodads are _custom_ and which were built-in with
-the game (the built-in doodads are shown in blue text plus an asterisk* symbol).
+This window shows a couple of checkboxes to manage how custom doodads will be
+attached to your level file. Check the box for "Attach custom doodads" and then
+click on the "Save Level Now" button. Or, the next time you save the level
+normally while this box was enabled, the custom doodads will be attached to
+your .level file then.
 
-The blue **Export Level** button will prompt for you to give a file name, and
-the level will be written there _with_ all of its custom doodads embedded inside.
-
-Optionally, you can choose to "Attach built-in doodads too" -- this will attach
-copies of the built-in doodads to your level, too, which will override the game's
-_actual_ built-in doodads. Doing this comes with some pros and cons:
+Optionally, you may choose to "Attach built-in doodads too" -- this will attach
+copies of the game's built-in doodads to your level, which will override the
+game's _actual_ built-in doodads when your level is played. This option comes
+with some pros and cons:
 
 * **Pro:** if future releases of _Sketchy Maze_ change the behavior or appearance
   of a built-in doodad, your custom level will still use the older version that

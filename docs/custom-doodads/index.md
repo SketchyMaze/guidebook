@@ -26,7 +26,8 @@ See [Drawing Doodads](edit-in-game.md) for details.
 ## Using external editors
 
 You may find it more comfortable to draw your doodads in an external
-image editor. All of the game's built-in doodads were drawn in The GIMP.
+image editor. All of the game's built-in doodads were drawn in the free &
+open source image editor, [GIMP](https://www.gimp.org).
 The `doodad` command-line tool that ships with the game is able to convert
 a series of PNG images into a doodad, attach a JavaScript, set tags, and
 so on.

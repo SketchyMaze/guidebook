@@ -22,6 +22,7 @@ appearance of the notebook paper background of your level.
 * **Bounded** is the default. The camera won't scroll past the top-left corner
   of the page (0,0), and the level size is capped to 2550x3300, or the
   approximate size of an 11:9 standard sheet of notebook paper in pixels.
+  You can adjust the boundary size later if you need more room!
 * **No Negative Space** is like Bounded, but the width and height of the level
   have no boundary. Levels can grow "infinitely" to the right and downward
   but no negative coordinates past the top or left edge.

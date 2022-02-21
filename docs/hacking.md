@@ -174,6 +174,11 @@ open the developer console and type:
     will also enable antigravity, otherwise you would fall to the
     bottom of the level.
 
+* `god mode`
+
+    Make the player character invulnerable to fire pixels and enemy
+    mobs. You can walk thru fire and can't fail the level.
+
 * `show all actors`
 
     Run this during Play Mode to make all invisible actors visible. For
@@ -200,6 +205,10 @@ open the developer console and type:
 * `play as thief`
 
     Play as the Thief by default.
+
+* `megaton weight`
+
+    Play as the Anvil by default.
 
 * `pinocchio`
 

@@ -31,8 +31,6 @@ linked together in your levels.
     * [Electric Door](#electric-door)
     * [Electric Trapdoor](#electric-trapdoor)
     * [Crumbly Floor](#crumbly-floor)
-* [Objects](#objects)
-    * [Box](#box)
 * [Gizmos](#gizmos)
     * [Buttons](#buttons)
     * [Sticky Button](#sticky-button)
@@ -68,16 +66,18 @@ the top-left corner of the level, and flash an error about the missing Start
 Flag.
 
 If the Start Flag is [linked](linked-doodads.md#start-flag) to another doodad
-in your level, then that doodad will be used for the player character. For example,
-linking a Start Flag to a Thief will use the Thief as the player character
-for that level instead of the default character, [Boy](#boy).
+in your level, then that doodad will be used for the player character.
+For example, linking a Start Flag to a Thief will use the Thief as the
+player character for that level instead of the default character, [Boy](#boy).
+
+![Link a doodad to the Start Flag to set the player character](images/start-flag-link.png)
 
 ### Checkpoint Flag
 
 ![Checkpoint Flag](images/doodads/checkpoint-flag.png)
 
 The **Checkpoint Flag** records the player's position in the level each time
-he reaches a checkpoint. Should they die during the level, the option to
+they reach a checkpoint. Should they die during the level, the option to
 "Retry from checkpoint" will teleport the player back to that location and
 continue gameplay without resetting the level -- so you keep any keys you
 have, unlocked doors remain unlocked, etc.
@@ -86,6 +86,11 @@ The default checkpoint location is at the Start Flag, and crossing Checkpoint
 Flags updates it to the last flag touched. When a second checkpoint is touched,
 the previous checkpoint flags are reset and the player's spawn point is the
 checkpoint they most recently touched.
+
+**New in v0.11.0:** if you link a doodad to a Checkpoint Flag, the player
+character will be replaced with that doodad when the flag is activated!
+
+![Link a doodad to the Checkpoint Flag](images/checkpoint-link.png)
 
 ### Exit Flag
 
@@ -101,7 +106,7 @@ flag to win the level.
 The **Anvil** is a "harmless" object that becomes dangerous when it is falling.
 
 It has no collision and is affected by gravity; when falling, it is dangerous
-to any **mobile** doodad that it encounters, including the player character.
+to any mobile doodad that it encounters, including the player character.
 Being hit by it will fail the level with "Watch out for falling anvils!" and
 you can retry from your last checkpoint. It destroys other mobile doodads that
 it lands on, removing them from the level.
@@ -109,6 +114,11 @@ it lands on, removing them from the level.
 If it receives a **power** signal (from a [linked](linked-doodads.md#buttons)
 Button or Switch), the Anvil will reset to its original location on the level,
 making "reset buttons" possible for puzzle levels.
+
+**New in v0.11.0:** the Anvil is invulnerable. This means that if the player
+character _is_ an Anvil, it can jump on and crush other enemies but can't be
+damaged by enemies or by fire pixels. Anvils also will not destroy
+invulnerable characters such as other Anvils.
 
 ### Box
 
@@ -126,9 +136,8 @@ pushing simultaneously. Boxes can be stacked on top of each other, but sometimes
 Boy will get "stuck" standing on top of the pile. If this happens, use the
 [cheat code](hacking.md#cheat-codes) `ghost mode` to get yourself unstuck.
 
-**New in v0.8.0:**
 If it receives a **power** signal (from a [linked](linked-doodads.md#buttons)
-Button or Switch), the Anvil will reset to its original location on the level,
+Button or Switch), the Box will reset to its original location on the level,
 making "reset buttons" possible for puzzle levels.
 
 ---
@@ -139,12 +148,15 @@ making "reset buttons" possible for puzzle levels.
 
 ![Boy](images/doodads/boy.gif)
 
-**Boy** is the player character.
+The **Boy** is the default player character.
 
 If he touches a "fire" pixel, he dies! You get a message like "Watch out for fire!"
 and it doesn't even have to say "fire" - it'll use the color's name.
 
 If he touches water he'll turn blue. Swimming physics aren't hooked up yet!
+
+The player character can be substituted on a custom map by linking another doodad
+to the Start Flag.
 
 ### Red Bird
 
@@ -153,37 +165,43 @@ If he touches water he'll turn blue. Swimming physics aren't hooked up yet!
 The **Bird** is a simple creature which flies left and right across your level,
 changing direction when it encounters an obstacle.
 
-The bird has solid collision on its top side, so the player can ride on it
-across the level. It's very slippery, though!
+The Bird is hostile towards players who are affected by gravity, and will dive
+bomb if they see a shot they can take (if you are spotted 45 degrees below the
+direction the Bird is flying). The Bird is dangerous while it is dive bombing.
+If it misses and hits the ground, it will fly back up to its original
+elevation.
 
-In the future, the bird will dive-bomb the player character in a diagonal
-trajectory when it sees a shot it can take. This will harm the player if the
-bird hits. If the bird hits the player, or misses and touches the ground, it
-will fly back up to its original altitude and continue its A.I. program of
-flying back and forth and searching for the player. It will also be easier to
-ride more reliably.
-
-Currently, however, the bird is harmless and does not dive bomb the player.
-
-**New in v0.8.0:** the Bird no longer can pick up items such as keys, unless
-controlled by the player character.
+The Bird can not pick up any items (such as keys) unless it is controlled by
+the player character. You can play as the Bird in a custom map by linking it
+to the Start Flag or a Checkpoint Flag. When under the player's control, you
+can dive by moving diagonally downwards and you can kill mobile doodads (such
+as the Azulians) by diving into them. Watch out! They can get you too if they
+touch you while you're _not_ diving!
 
 ### Azulians
 
+![Blue Azulian](images/doodads/blue-azulian.gif)
 ![Red Azulian](images/doodads/red-azulian.gif)
+![White Azulian](images/doodads/white-azulian.gif)
 
-The **Red Azulian** was the first test mobile character, and the
-**Blue Azulian** was originally the player character in very early builds of
-the game.
+The **Azulians** are hostile mobs and come in three varieties. The Blue Azulian
+walks the slowest and has the shortest jump height and on the other end of the
+spectrum, the White Azulian is the fastest and can jump the highest.
 
-The Azulians' A.I., when placed in your level, is that they walk right and
-left across the ground, changing directions when hitting an obstacle. They
-can pick up keys, unlock doors, and interact with buttons and switches that
-they walk onto - basically all the capabilities as the player character.
-The blue Azulian walks half as fast as the red one.
+When the Azulians notice the player character they will begin to chase after
+them, and you'll fail the level if they get you! Azulians are friendly to other
+Azulians, and they don't attack the Thief either.
 
-You can play as them in your custom levels by linking a Start Flag to
-the Azulian.
+When not chasing after the player, the Azulians simply walk back and forth and
+change direction when they encounter an obstacle. They can pick up keys, unlock
+doors, and interact with buttons and switches that they walk onto.
+
+You can play as the Azulians in your custom levels by linking them to the
+Start Flag or to a Checkpoint Flag.
+
+> Fun Trivia: the Red Azulian was the game's first test mobile character,
+> and the Blue Azulian was originally a placeholder for the player character
+> in early builds of the game.
 
 ### Thief
 
@@ -230,8 +248,9 @@ mobile doodad "picks up" the Key of the same color. The doors may then be
 permanently unlocked if the player walks into them while holding the key.
 
 The **Colored Keys** are not consumed when used; with one key the player can
-unlock many doors of the same color unless they lose the key. Currently there is
-no method to lose keys except for the "drop all items" [cheat code](hacking.md#cheat-codes).
+unlock many doors of the same color unless they lose the key. Keys may be
+stolen by the [Thief](#thief) or by using the  "drop all items"
+[cheat code](hacking.md#cheat-codes).
 
 A locked door has a golden padlock over its sprite; after being unlocked, the
 padlock is missing even while the door is closed. Should the player lose the keys

@@ -6,7 +6,7 @@
 
 ![Link Tool](images/link-tool.png)
 
-In the [Level Editor](custom-levels/index.md), click on the <img src="images/sprites/actor-tool.png" width="16" height="16"> **Doodad Tool** and drag a two doodads into your level, such as a Button and an Electric Door.
+In the [Level Editor](custom-levels/index.md), click on the <img src="images/sprites/actor-tool.png" width="16" height="16"> **Doodad Tool** and drag two doodads into your level, such as a Button and an Electric Door.
 
 Then, select the <img src="images/sprites/link-tool.png" width="16" height="16"> **Link Tool**. When you mouse over the actors, a pink border appears instead of the usual orange.
 
@@ -14,11 +14,11 @@ Click one of the doodads, and then the other doodad. The first doodad will have 
 
 You may use the <img src="images/sprites/actor-tool.png" width="16" height="16"> **Doodad Tool** to move the doodads to other places on your level, and they'll remain linked.
 
-Currently, the only way to _unlink_ two doodads is to delete one of them. With the **Doodad Tool**, right-click on a doodad to remove it from your level, or drag it back into the Doodads window.
+To **unlink** two doodads, just click on the two of them again with the Link Tool. Or, remove one of the doodads from your level which will break any links it had. You can remove the doodad by right-clicking it while the **Doodad Tool** is selected, or by dragging it back into the doodads window.
 
 ## Doodad Interactions
 
-This section describes how the built-in doodads interact with one another when they're linked, and some example use cases. Custom doodads made by users should follow similar patterns; check the [PubSub event types](custom-doodads/scripts.md#official-standard-pub-sub-messages) used by built-in doodads, or invent your own custom event types!
+This section describes how the built-in doodads interact with one another when they're linked, and some example use cases. Custom doodads made by users should follow similar patterns; check the [PubSub event types](custom-doodads/api-reference.md#official-standard-pubsub-messages) used by built-in doodads, or invent your own custom event types!
 
 ### Start Flag
 
@@ -29,6 +29,16 @@ It is considered an error to link more than one doodad to the Start Flag.
 It is undefined behavior which doodad "wins" in that case.
 
 Upon level start, all actors linked to the Start Flag are destroyed.
+
+### Checkpoint Flag
+
+Link it with **any one doodad** and that doodad will replace the player character
+when the checkpoint flag is activated.
+
+It is considered an error to link more than one doodad to the Checkpoint Flag.
+It is undefined behavior which doodad "wins" in that case.
+
+Upon level start, all actors linked to the Checkpoint Flag are destroyed.
 
 ### Anvil
 
@@ -125,7 +135,7 @@ Quick reference:
 
 The technicals (useful if you want to create your own custom warp doors):
 
-* When the player actives the door with the Space key or similar:
+* When the player activates the door with the Space key or similar:
     * If there is no linked door, flash "This door is locked." on screen.
     * Animate: freeze the player, open the door, hide the player, shut the door.
     * Publish a **warp-door:incoming** (Actor) event to the linked door so it can receive the actor (player character).
@@ -135,6 +145,8 @@ The technicals (useful if you want to create your own custom warp doors):
     * Animate: open the door, make the player visible, shut the door.
 * Only the Player character can open warp doors, not other mobile doodads.
 * Blue and Orange doors listen for the **broadcast:state-change** event from [State Buttons](#boolean-state-doodads).
+
+**Note:** Warp Doors identify valid doors by looking for the text "Warp Door" in its title. When making custom warp doors, ensure your doodad's title has the text "Warp Door" in it for the game's built-in doors to match with it.
 
 ### Boolean State Doodads
 

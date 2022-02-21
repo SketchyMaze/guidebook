@@ -17,9 +17,9 @@ Gameplay:
 * The **Story Mode** screen presents a UI to browse level packs and select a level.
 * Upon winning a level, a "Next Level" button appears that automatically advances to the
   next level of the pack. Pressing the Return key works too.
-* (In the future) A level pack may "lock" some of its levels until the player completes
-  earlier levels. Each level completed will unlock the next. A level pack can define the
-  number of unlocked levels to start with (or have them all unlocked).
+* A level pack may "lock" some of its levels until the player completes earlier levels.
+  Each level completed will unlock the next. A level pack can define the number of
+  unlocked levels to start with (or have them all unlocked).
 
 Custom doodads:
 
