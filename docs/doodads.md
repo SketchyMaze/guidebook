@@ -46,6 +46,7 @@ linked together in your levels.
     * [Power Source](#power-source)
     * [Stall Player](#stall-player)
     * [Invisible Warp Door](#invisible-warp-door) - **NEW in v0.10.1**
+    * [Reset Timer](#reset-timer) **NEW in v0.12.0**
 
 ---
 
@@ -142,7 +143,7 @@ making "reset buttons" possible for puzzle levels.
 
 ---
 
-# Creatures
+## Creatures
 
 ### Boy
 
@@ -178,6 +179,10 @@ can dive by moving diagonally downwards and you can kill mobile doodads (such
 as the Azulians) by diving into them. Watch out! They can get you too if they
 touch you while you're _not_ diving!
 
+The Bird's behavior can vary according to the level's Difficulty rule:
+
+* Peaceful: the Bird will not attack any player and simply flies back and forth.
+
 ### Azulians
 
 ![Blue Azulian](images/doodads/blue-azulian.gif)
@@ -202,6 +207,13 @@ Start Flag or to a Checkpoint Flag.
 > Fun Trivia: the Red Azulian was the game's first test mobile character,
 > and the Blue Azulian was originally a placeholder for the player character
 > in early builds of the game.
+
+The Azulian's behavior can very depending on the level's Difficulty rule:
+
+* Peaceful: Azulians are passive to all players and simply walk back and forth.
+* Hard: Azulians have an infinite aggro radius and will move towards the
+  player character no matter how far away. They are hostile to _all_ player
+  creatures, even if you are playing as an Azulian or a Thief.
 
 ### Thief
 
@@ -511,3 +523,19 @@ doodad again.
 This doodad acts just like the [Warp Doors](#warp-doors) but is invisible.
 Pressing the 'Use' key while grounded will activate the door and send you
 to the door it is linked to (if one exists).
+
+### Reset Timer
+
+![Reset Timer](images/doodads/reset-timer.png)
+
+This doodad will reset the level timer to zero, one time, when touched by
+the player. An example where it is used is on the Azulian Tag Tutorial level:
+the player could spend any amount of time reading the tutorial instructions,
+and Azulian Tag levels are rewarded for how long the player survives before
+dying, so they could artificially run up the clock before the game even
+begins!
+
+The Reset Timer only runs one time when the player first touches it. If
+the doodad receives a power signal from a linked button or similar, it
+will 'reset' and is able to again reset the level timer one time the next
+time the player touches it.

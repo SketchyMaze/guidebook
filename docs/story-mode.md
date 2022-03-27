@@ -39,6 +39,27 @@ You may complete a level by using cheat codes, e.g. for noclip and going straigh
 for the level goal. This will unlock the next level, but you won't be able to
 record a High Score for completing a level using cheats.
 
+## Azulian Tag
+
+**New in v0.12.0**
+
+Azulian Tag is a game mode in which the player is "It" and they have to avoid
+being caught by the enemies (an inverted version of the classic game, Tag).
+_Sketchy Maze_ includes a levelpack of Azulian Tag levels. The key elements
+of an Azulian Tag map include:
+
+* Hard difficulty: so all Azulians across the whole level will chase towards
+  the player character.
+* Survival mode: the player is rewarded with a high score (silver medal) for
+  surviving the longest amount of time before dying due to an Azulian or
+  other cause.
+
+Azulian Tag maps should also hide an Exit Flag somewhere to allow players to
+complete the level with a gold medal (for not dying). The gold medal high score
+is still based on how quickly the player beats the level, while the silver
+medal (if they get got by an Azulian) high score is for the longest duration
+kept alive.
+
 ## Backing Up Your Save Game
 
 Your save game file can be backed up and restored to another computer so you don't

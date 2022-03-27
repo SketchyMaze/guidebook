@@ -131,6 +131,12 @@ The following commands are supported:
     to the game's working directory. A wrong filename will play a
     new, blank level where Boy just falls to the bottom of the map.
 
+* `titlescreen <filename>`
+
+    Open the title screen with a custom user level as its background.
+    Note that the lazy scroll doesn't handle Unbounded levels very
+    well yet!
+
 * `close`
 
     Close the current level being edited and return to the title screen.
@@ -213,6 +219,15 @@ open the developer console and type:
 * `pinocchio`
 
     Play as the Boy (default) as the player character.
+
+* `master key`
+
+    Temporarily allow playing locked levels in Story Mode without having
+    completed earlier levels to unlock them properly.
+
+* `test load screen`
+
+    Opens the loading screen for a few moments.
 
 ## JavaScript Shell
 

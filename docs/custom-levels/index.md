@@ -115,6 +115,43 @@ Properties" menu to reopen the level settings and you will find the
 options to edit the Title of your level and change the Author name
 if you like. The default author copies your OS username.
 
+### Game Rules
+
+Opening the "Level -> Level Properties" window from the editor, the Game Rules
+can be customized for your level and can tweak some of the gameplay behaviors
+to allow for some more interesting maps.
+
+The current game rules available include:
+
+#### Difficulty Setting
+
+The default level difficulty is Normal but you can also set your level's
+difficulty to the Peaceful or Hard options:
+
+* On Peaceful mode, enemy mobs will generally ignore the player character
+  entirely and do not attack.
+* On Hard mode, enemy mobs become more aggressive. For example, the Azulians
+  will have an infinite aggro radius and will come at the player character
+  no matter how far away you are.
+
+Specific behaviors of enemies are up to their programming. Doodad scripts can
+query the `Level.Difficulty` value and react accordingly.
+
+#### Survival Mode
+
+On levels where player death is all but guaranteed (e.g. a Hard Mode,
+[Azulian Tag](../story-mode.md#azulian-tag)) map) the Survival Mode setting
+will invert the definition of "high score" for the silver tier in Story Mode.
+
+Normally, the high score is rewarded to the fastest time to complete a level.
+If the player dies and respawns from checkpoint, they get a silver medal and
+if they make it to the Exit Flag unscathed they get a gold medal. For Survival
+levels, the level is completed if the player dies but they are rewarded for
+_how long_ they survived rather than how quickly they died. The gold medal for
+Survival levels is still based on how quickly they beat the level.
+
+See [Azulian Tag](../story-mode.md#azulian-tag) for more details.
+
 ## Editor Interface
 
 ![Level Editor View](../images/newlevel-2.png)
@@ -130,6 +167,11 @@ Quick 5-second overview of the editor interface:
 * The top of the window has your [**Menu Bar**](#menu-bar), a common sight on desktop applications.
 * The panel on the left side of the window is your **Tool Box**. Clicking these
   buttons activates a specific drawing tool or mode:
+    * <img src="../images/sprites/pan-tool.png" width="16" height="16">
+      **Pan Tool** lets you scroll the level viewport by clicking and dragging. Ideal
+      for mobile where you rely on a touch screen and don't want to accidentally draw
+      onto your level! Middle-click and two-finger swipe gestures can also scroll the
+      level viewport at all times.
     * <img src="../images/sprites/pencil-tool.png" width="16" height="16">
       **Pencil Tool** lets you click, drag, and draw pixels of your selected
       Palette color onto your level freehand. Shortcut key: `f`
@@ -142,17 +184,24 @@ Quick 5-second overview of the editor interface:
       **Rectangle Tool** lets you easily draw rectangles on your level. Shortcut: `r`
     * <img src="../images/sprites/ellipse-tool.png" width="16" height="16">
       **Ellipse Tool** lets you draw circles or elliptical shapes. Shortcut: `c`
+    * <img src="../images/sprites/text-tool.png" width="16" height="16">
+      **Text Tool** lets you stamp text messages onto your level. You can choose
+      between the game's built-in fonts (including the Azulian font) and set the
+      size and color from your palette.
+    * <img src="../images/sprites/flood-tool.png" width="16" height="16">
+      **Flood Tool** (or 'paint bucket tool') can easily replace a contiguous area of
+      your drawing from one color to another.
+    * <img src="../images/sprites/eraser-tool.png" width="16" height="16">
+      **Eraser Tool** cleans up your mistakes. Click and drag over pixels you've
+      drawn to delete the pixels from your level. Shortcut: `x`
     * <img src="../images/sprites/actor-tool.png" width="16" height="16">
       **Doodad Tool** lets you drag doodads such as buttons and doors onto your
-      level. See the [Doodad Tool](#doodad-tool) below. Shortcut: `d`
+      level. See the [Doodad Tool](#doodad-tool) below. Shortcut: `q`
     * <img src="../images/sprites/link-tool.png" width="16" height="16">
       **Link Tool** lets you link doodads together so that they can interact off
       each other. For example, a Button connected to an Electric Door will cause
       the door to open and close when the button is pressed. See [Link Tool](#link-tool)
       below.
-    * <img src="../images/sprites/eraser-tool.png" width="16" height="16">
-      **Eraser Tool** cleans up your mistakes. Click and drag over pixels you've
-      drawn to delete the pixels from your level. Shortcut: `x`
 * The **Size:** label on the left controls the brush size of your current drawing
   tool. This translates to the line thickness, or how big your pixels are when
   drawn into the level. Click the + and - buttons to increase or decrease the
@@ -168,7 +217,7 @@ Quick 5-second overview of the editor interface:
 ## Doodad Tool
 
 When clicking on the <img src="../images/sprites/actor-tool.png" width="16" height="16"> **Doodad Tool** or
-pressing the `d` key, the Doodads window will appear in the level editor:
+pressing the `q` key, the Doodads window will appear in the level editor:
 
 ![Doodads window](../images/doodads.png)
 

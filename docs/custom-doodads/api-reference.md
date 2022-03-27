@@ -57,6 +57,9 @@ Table of Contents:
     * [Actors.FindPlayer()](#actorsfindplayer-actor) `v0.11.0`
     * [Actors.New()](#actorsnewfilename-string-actor) `v0.11.0`
     * [Actors.SetPlayerCharacter()](#actorssetplayercharacterfilename-string) `v0.11.0`
+* [Level](#level) - functions and variables relating to the level
+    * [Level.Difficulty](#leveldifficulty-int) `v0.12.0`
+    * [Level.ResetTimer](#levelresettimer) `v0.12.0`
 * [Timers and Intervals](#timers-and-intervals)
     * [setTimeout()](#settimeoutfunction-milliseconds-int-int)
     * [setInterval()](#setintervalfunction-milliseconds-int-int)
@@ -563,6 +566,37 @@ Replace the nearest player character with the named doodad.
 
 This is used by the Checkpoint Flag when the flag is linked to a doodad so
 that it replaces the player character with it.
+
+-----
+
+## Level
+
+### Level.Difficulty int
+
+**New in v0.12.0**
+
+This integer holds the difficulty setting of the current level:
+
+* -1 is Peaceful
+* 0 is Normal (default)
+* 1 is Hard
+
+An enemy doodad can alter its behavior by checking the difficulty level. For
+example, the Azulians become more aggressive on Hard difficulty.
+
+```javascript
+if (Level.Difficulty > 0) {
+    // Hard mode
+} else if (Level.Difficulty < 0) {
+    // Peaceful mode
+}
+```
+
+### Level.ResetTimer()
+
+**New in v0.12.0**
+
+Calling this function will reset the in-game level timer to zero.
 
 -----
 
