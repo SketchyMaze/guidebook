@@ -21,11 +21,15 @@ linked together in your levels.
 * [Creatures](#creatures)
     * [Boy](#boy) - The player character
     * [Red Bird](#red-bird)
+    * [Blue Bird](#blue-bird) **NEW in v0.13.0**
     * [Azulians](#azulians)
     * [Thief](#thief)
+    * [Snake](#snake) - **NEW in v0.13.0**
+    * [Crusher](#crusher) - **NEW in v0.13.0**
 * [Doors & Trapdoors](#doors-trapdoors)
     * [Colored Locked Doors & Keys](#colored-locked-doors-keys)
     * [Small Key Doors](#small-key-doors)
+    * [Gems & Totems](#gems-totems) - **NEW in v0.13.0**
     * [Warp Doors](#warp-doors)
     * [Trapdoors](#trapdoors)
     * [Electric Door](#electric-door)
@@ -183,6 +187,14 @@ The Bird's behavior can vary according to the level's Difficulty rule:
 
 * Peaceful: the Bird will not attack any player and simply flies back and forth.
 
+### Blue Bird
+
+![Bird](images/doodads/bird-blue.gif)
+
+The Blue bird flies in a sine wave pattern while idle and, like the
+Red Bird, will dive and attack player characters who can't fly, but
+with a larger aggro radius than the red bird.
+
 ### Azulians
 
 ![Blue Azulian](images/doodads/blue-azulian.gif)
@@ -245,6 +257,34 @@ has special abilities compared to most other characters:
 * The player character _can_, though, pilfer items that the other Thieves have
   collected.
 
+### Snake
+
+![Snake](images/doodads/snake.gif)
+
+The **Snake** is a stationary enemy that always turns to face the player
+character. If you are near the snake and you jump, the Snake will also
+jump, hoping to catch you mid-air when you try and jump over!
+
+If you are playing **as** the snake, you stay in your idle animation
+while moving laterally and play the jump animation when you jump.
+Snakes are friendly to other Snakes but will still jump along with
+you.
+
+### Crusher
+
+![Crusher](images/doodads/crusher.gif)
+
+The **Crusher** is a trap that falls from above. It sleeps soundly
+until the player character approaches, and it will start peeking at
+you with one eye open. If you get below the Crusher, it will attempt
+to drop on top of you! It might also crush other mobile creatures
+who happen to get in the way.
+
+If you play **as** the Crusher you can travel through the air freely
+with antigravity enabled. The Crusher will peek in the direction you're
+moving (right or left, or both!) and puts on the angry drop face if
+you are moving downwards.
+
 ---
 
 ## Doors & Trapdoors
@@ -288,6 +328,36 @@ unlock as many Small Key Doors as the number of keys they hold.
 
 The Small Key Door is permanently unlocked after unlocking it once. A golden
 padlock appears on the door when it's locked, which disappears after unlocking.
+
+### Gems & Totems
+
+![Totems](images/doodads/totem.png)
+
+![Green Gemstone](images/doodads/gem-green.gif)&nbsp;
+![Blue Gemstone](images/doodads/gem-blue.gif)&nbsp;
+![Yellow Gemstone](images/doodads/gem-yellow.gif)&nbsp;
+![Red Gemstone](images/doodads/gem-red.gif)
+
+Gemstones are collectible items which slot into Totems blocks. The player can
+carry many of the same gemstone at a time and a gemstone is consumed when its
+matching totem is activated.
+
+The Totem emits a `power(true)` signal to linked doodads when it receives its
+gem stone. However, if the Totem is linked with _other_ Totems, it will not
+emit a power signal until _all_ of its linked Totems have their gem stones.
+
+To set up a multi-totem lock that opens an Electric Door only when all the
+gems have been collected:
+
+* Only one totem of the bunch needs to link to the Electric Door.
+* That same totem also needs to link to each of the other totems.
+
+You do not need to link every Totem to every Totem. Pick just one of
+your totems and link it to the Electric Door _and_ to all of the
+other totems, and it won't emit a power signal until itself and all
+its linked totems have gems.
+
+![How to link multiple totems together](images/totem-links.png)
 
 ### Warp Doors
 
