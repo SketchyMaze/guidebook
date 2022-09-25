@@ -203,6 +203,10 @@ var p = Self.Position()
 console.log("I am at %d,%d", p.X, p.Y)
 ```
 
+#### Self.Size() Rect
+
+Returns the dimensions of your doodad's canvas size.
+
 #### Self.MoveTo(Point)
 
 Teleport the current doodad to an exact point on the level.
@@ -237,7 +241,7 @@ function main() {
     // Suppose the doodad's sprite size is 64x64 pixels square.
     // The door is in side profile where the door itself ranges from pixels
     //    (20, 0) to (24, 64)
-    Self.SetHitbox(20, 0, 24, 64)
+    Self.SetHitbox(20, 0, 4, 64)
 
     // OnCollide handlers.
     Events.OnCollide(function(e) {
@@ -545,6 +549,10 @@ attributes:
   has special behavior when touched (i.e. a button that presses in), you should
   wait until Settled=true before running your handler for that.
 
+To contest the collision (behave as a solid object), `return false` from
+the OnCollide handler. You can do this while Settled=false to behave as a
+solid obstacle and prevent a doodad from intersecting your hitbox.
+
 #### Events.OnLeave( func(event) )
 
 Called when an actor that _was_ colliding with your doodad is no longer
@@ -553,11 +561,28 @@ colliding (or has left your doodad's sprite box).
 The event argument is the same as OnCollide, with the Actor available
 and Settled=true (others left as default zero values).
 
-#### Events.RunKeypress( func(event) )
+#### Events.OnKeypress( func(event) )
 
-Handle a keypress. `event` is an `event.State` from the render engine.
+Handle a keypress. `event` is an `event.State` from the render engine with
+attributes like Up, Down, Left, Right (arrow keys being pressed), Enter,
+Escape and some functions like KeyDown("F1").
 
-TODO: document that.
+Player character doodads may monitor for keypresses to update their animation
+and walk in the correct direction. The game engine **only** delivers Keypress
+events to the player character.
+
+Don't get too creative with this function, in case the way player characters
+handle their behaviors is updated in the future. Generally, only the Up, Down,
+Left and Right attributes should be relied upon -- touch controls and joysticks
+emulate these 'keys' for player movement. **All other keys** are not guaranteed
+to function in future releases of the game!
+
+```javascript
+Events.OnKeypress(ev => {
+    let walking = ev.Right || ev.Left,
+        jumping = ev.Up;
+});
+```
 
 -----
 
@@ -609,7 +634,9 @@ Publish a named message to all of your **linked** doodads.
 function main() {
     // When an actor collides with the button, emit a powered state.
     Events.OnCollide(function(e) {
-        Message.Publish("power", true);
+        if (e.Settled) {
+            Message.Publish("power", true);
+        }
     });
 
     // When the actor leaves the button, turn off the power.
