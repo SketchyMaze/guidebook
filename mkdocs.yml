@@ -5,17 +5,21 @@ nav:
   - About Sketchy Maze: about.md
   - Change History: changes.md
   - Controls: controls.md
+  - Story Mode: story-mode.md
   - Creating Levels: custom-levels/index.md
   - Publishing Levels: custom-levels/publishing.md
+  - Level Packs: custom-levels/levelpacks.md
   - Custom Wallpaper: custom-levels/custom-wallpaper.md
   - Built-in Doodads: doodads.md
   - Linked Doodads: linked-doodads.md
   - Creating Custom Doodads: custom-doodads/index.md
   - Drawing Doodads: custom-doodads/edit-in-game.md
   - Doodad Scripts: custom-doodads/scripts.md
+  - Script API Reference: custom-doodads/api-reference.md
   - Shortcut Keys: hotkeys.md
   - "`doodad` Program": doodad-tool.md
   - Hacking: hacking.md
+  - Register Your Game: register.md
   - Open Source Licenses: licenses.md
 theme: readthedocs
 markdown_extensions:
