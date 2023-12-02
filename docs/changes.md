@@ -1,5 +1,68 @@
 # Changes
 
+## v0.13.2 (Dec 2 2023)
+
+This release brings some new features and optimization for the game's file
+formats to improve performance and memory usage.
+
+Some new features:
+
+* **Doodads can be non-square!** You can now set a rectangular canvas size
+  for your doodads. Many of the game's built-in doodads that used to be
+  off-center before (doors, creatures) because their sprites were not squares
+  now have correct rectangular shapes.
+* A **Cheats Menu** has been added which enables you to enter many of the
+  game's cheat codes by clicking on buttons instead. Enable it through the
+  "Experimental" tab of the Settings, and the cheats menu can be opened from
+  the Help menu bar during gameplay.
+* The game now supports **Signed Levels** and levelpacks which will enable the
+  free version of the game to play levels that have embedded doodads in them.
+  The idea is that the base game in the future may come with levelpacks that
+  use custom doodads (to tell a specific story) and these doodads may be so
+  specific and niche that they will ride with the levelpack instead of be
+  built-in to the game. To allow the free version of the game to play these
+  levels, the levelpacks will be signed. It also makes it possible for
+  promotional levelpacks or "free DLC" to be shipped separately and allow
+  free versions of the game to play them with their attached custom doodads.
+
+Other miscellaneous changes:
+
+* The default Author name on your new drawings will prefer to use your
+  license registration name (if the game is registered) before falling back
+  on your operating system's $USER name like before.
+* In the level editor, you can now use the Pan Tool to access the actor
+  properties of doodads you've dropped into your level. Similar to the
+  Actor Tool, when you mouse-over an actor on your level it will highlight
+  in a grey box and a gear icon in the corner can be clicked to access
+  its properties. Making the properties available for the Pan Tool can
+  help with touchscreen devices, where it is difficult to touch the
+  properties button without accidentally dragging the actor elsewhere
+  on your level as might happen with the Actor Tool!
+* Fix a bug wherein the gold "perfect run" icon next to the level timer
+  would sometimes not appear, especially after you had been cheating
+  before - if you restart the level with no cheats active the gold icon
+  should now always appear.
+* New cheat code: `tesla` will send a power signal to ALL actors on the
+  current level in play mode - opening all electric doors and trapdoors.
+  May cause fun chaos during gameplay. Probably not very useful.
+* Start distributing AppImage releases for GNU/Linux (64-bit and 32-bit)
+
+Some technical changes related to file format optimization:
+
+* Palettes are now limited to 256 colors so that a palette index can fit
+  into a uint8 on disk.
+* Chunks in your level and doodad files are now encoded in a binary format
+  instead of JSON for a reduction in file size. The current (and only)
+  chunk implementation (the MapAccessor) encodes to a binary format involving
+  trios of varints (X, Y position + a Uvarint for palette index).
+* Chunk sizes in levels/doodads is now a uint8 type, meaning the maximum
+  chunk size is 255x255 pixels. The game's default has always been 128x128
+  but now there is a limit. This takes a step towards optimizing the game's
+  file formats: large world coordinates (64-bit) are mapped to a chunk
+  coordinate, and if each chunk only needs to worry about the 255 pixels
+  in its territory, space can be saved in memory without chunks needing to
+  theoretically support 64-bit sizes of pixels!
+
 ## v0.13.1 (Oct 10 2022)
 
 This release brings a handful of minor new features to the game.
