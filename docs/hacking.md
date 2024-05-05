@@ -6,7 +6,7 @@ I've always loved it when developers keep debugging features in their released g
 
 ## Log File
 
-The game emits logs during its runtime to standard output. Launching the game from within a terminal on Linux or macOS will show the logs there, color coded by error level. The log from the most recent run of the game is also saved to your [profile directory](/profile-directory.html), which may be the only way to see the logs on a Windows machine.
+The game emits logs during its runtime to standard output. Launching the game from within a terminal on Linux or macOS will show the logs there, color coded by error level. The log from the most recent run of the game is also saved to your [profile directory](../profile-directory.html), which may be the only way to see the logs on a Windows machine.
 
 When custom doodad scripts use `console.log()` and similar, their logs are also written to this file, and it can be useful when debugging your custom doodad scripts.
 

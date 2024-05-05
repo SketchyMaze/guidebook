@@ -168,7 +168,7 @@ The `time` global exposes the following duration intervals as seen in the above 
 
 ## Console Logging
 
-Like in node.js and the web browser, `console.log` and friends are available for logging from a doodad script. Logs are emitted to the same place as the game's logs are (e.g. standard output and to your [profile directory](/profile-directory.html)).
+Like in node.js and the web browser, `console.log` and friends are available for logging from a doodad script. Logs are emitted to the same place as the game's logs are (e.g. standard output and to your [profile directory](../profile-directory.html)).
 
 ```javascript
 console.log("Hello world!");
