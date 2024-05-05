@@ -4,7 +4,7 @@
 
 [Sketchy Maze](about.md) is a drawing-based maze game themed around hand-drawn maps on paper. You can draw a level for a 2D platformer game, drag-and-drop "doodads" such as buttons and doors into your level, play it and share your levels with others.
 
-**Last Updated:** Dec 2, 2023 for Sketchy Maze v0.13.2.
+**Last Updated:** May 4, 2024 for Sketchy Maze v0.14.0.
 
 ## Table of Contents
 

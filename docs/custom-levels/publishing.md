@@ -28,8 +28,9 @@ The Publish window will show the list of named doodads which currently exist in
 your level, designating which doodads are _custom_ and which were built-in with
 the game (the built-in doodads are shown in blue text plus an asterisk* symbol).
 
-The blue **Export Level** button will prompt for you to give a file name, and
-the level will be written there _with_ all of its custom doodads embedded inside.
+Make sure the box to "Attach custom doodads when I save the level" is enabled,
+and click on the "Save Level Now" button. The custom doodads will be embedded
+into the level file on each save while this box is enabled.
 
 Optionally, you can choose to "Attach built-in doodads too" -- this will attach
 copies of the built-in doodads to your level, too, which will override the game's

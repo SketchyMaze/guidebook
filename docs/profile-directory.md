@@ -26,6 +26,7 @@ There are a few interesting folders:
 
 And some interesting files:
 
+*   **logfile.txt:** holds the log output from your last run of the game.
 *   **settings.json:** holds your game settings and is unique to your installation of the game.
 *   **savegame.json:** holds your progress through Story Mode level packs including high scores on the levels.
 *   **license.key:** if you have [registered the game](register.md) this is a copy of your license key file.

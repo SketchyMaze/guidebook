@@ -19,55 +19,6 @@ Custom doodads:
 * (In the future) A level pack can hold a folder of custom doodads that will be used by its levels. Instead of each level needing to [publish](publishing.md) (embed) its doodads individually, the level pack holds onto them so multiple levels can use them while saving on disk space!
 * **Note:** [Free (shareware)](../register.md) versions of the game fully support custom Level Packs, but they don't support embedded custom doodads. Level Packs that use only the built-in doodads work perfectly, and in case you're using custom doodads, the player may manually install the custom doodads in their [profile directory](../profile-directory.md) and play it that way.
 
-## Structure of a Level Pack
-
-A levelpack is basically a ZIP file that contains levels, doodads, and an index.json that describes the level pack. To create a levelpack by hand, just create a correctly formatted ZIP file and rename the .zip extension to .levelpack. See [Creating a Level Pack](#creating-a-level-pack), below: the doodad tool makes this much easier!
-
-The contents of a .levelpack ZIP archive are like follows:
-
-    levels/
-        First.level
-        Second.level
-        Third.level
-    doodads/
-        Example.doodad
-    index.json
-
-
-The `levels` folder holds your .level files and the `doodads` folder holds custom .doodad files. The doodads folder is optional and doesn't need to be included if there are no custom doodads.
-
-The index.json file describes the levelpack. At time of writing it is structured like the following:
-
-    {
-        "Title": "Tutorial",
-        "description": "Learn how to play the game.",
-        "author": "Noah P",
-        "created": "2021-12-27T04:45:29.186345525Z",
-        "levels": [
-            {
-                "title": "Lesson 1: Controls",
-                "author": "Noah P",
-                "filename": "Tutorial 1.level"
-            },
-            {
-                "title": "Lesson 2: Keys & Doors",
-                "author": "Noah P",
-                "filename": "Tutorial 2.level"
-            },
-            {
-                "title": "Lesson 3: Gizmos and Doodads",
-                "author": "Noah P",
-                "filename": "Tutorial 3.level"
-            }
-        ],
-        "freeLevels": 0
-    }
-
-
-The `levels` array describes the levels and their sort order. It is possible for .level files to exist in the levelpack which _are not_ described in the index.json; these levels will not be reachable in-game but in the future this may support hiding bonus levels linked to by other levels in the pack.
-
-**TO DO:** the game does not yet do anything with the `doodads` folder. In the future, this folder will help a group of levels embed a custom doodad _once_ in the levelpack instead of each keeping a separate copy.
-
 ## Creating a Level Pack
 
 The easiest way to create a .levelpack file is with the [doodad tool](../doodad-tool.md) that shipped with the game.
@@ -124,3 +75,51 @@ When playing a Story Mode level from a levelpack, the "Edit" button may be click
 
 You are free to do this and learn from the levels you enjoy, and this won't harm the original levels at all! You can save a copy of the level, make changes to it and playtest your version of the level.
 
+## Structure of a Level Pack
+
+A levelpack is basically a ZIP file that contains levels, doodads, and an index.json that describes the level pack. To create a levelpack by hand, just create a correctly formatted ZIP file and rename the .zip extension to .levelpack. See [Creating a Level Pack](#creating-a-level-pack), below: the doodad tool makes this much easier!
+
+The contents of a .levelpack ZIP archive are like follows:
+
+    levels/
+        First.level
+        Second.level
+        Third.level
+    doodads/
+        Example.doodad
+    index.json
+
+
+The `levels` folder holds your .level files and the `doodads` folder holds custom .doodad files. The doodads folder is optional and doesn't need to be included if there are no custom doodads.
+
+The index.json file describes the levelpack. At time of writing it is structured like the following:
+
+    {
+        "Title": "Tutorial",
+        "description": "Learn how to play the game.",
+        "author": "Noah P",
+        "created": "2021-12-27T04:45:29.186345525Z",
+        "levels": [
+            {
+                "title": "Lesson 1: Controls",
+                "author": "Noah P",
+                "filename": "Tutorial 1.level"
+            },
+            {
+                "title": "Lesson 2: Keys & Doors",
+                "author": "Noah P",
+                "filename": "Tutorial 2.level"
+            },
+            {
+                "title": "Lesson 3: Gizmos and Doodads",
+                "author": "Noah P",
+                "filename": "Tutorial 3.level"
+            }
+        ],
+        "freeLevels": 0
+    }
+
+
+The `levels` array describes the levels and their sort order. It is possible for .level files to exist in the levelpack which _are not_ described in the index.json; these levels will not be reachable in-game but in the future this may support hiding bonus levels linked to by other levels in the pack.
+
+**TO DO:** the game does not yet do anything with the `doodads` folder. In the future, this folder will help a group of levels embed a custom doodad _once_ in the levelpack instead of each keeping a separate copy.

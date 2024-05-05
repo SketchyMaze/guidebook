@@ -4,6 +4,12 @@ This page discusses some advanced features of the game and targets a more techni
 
 I've always loved it when developers keep debugging features in their released games, and playing around with those and figuring out what makes the game tick. I purposely left some debug features in the game that you can play around with.
 
+## Log File
+
+The game emits logs during its runtime to standard output. Launching the game from within a terminal on Linux or macOS will show the logs there, color coded by error level. The log from the most recent run of the game is also saved to your [profile directory](/profile-directory.html), which may be the only way to see the logs on a Windows machine.
+
+When custom doodad scripts use `console.log()` and similar, their logs are also written to this file, and it can be useful when debugging your custom doodad scripts.
+
 ## Debug Features
 
 Pressing `F3` within the game will draw the **Debug Overlay** on top of the screen, displaying details such as the game's frames per second and some contextual details like: what is the world index of the pixel below your mouse cursor, while you're editing a level? (Details such as this are also seen in the status bar at the bottom of the editor screen).

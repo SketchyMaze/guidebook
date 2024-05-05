@@ -23,6 +23,9 @@ Some Story Mode campaigns have locked levels and only the earliest levels are pl
 
 You may complete a level by using cheat codes, e.g. for noclip and going straight for the level goal. This will unlock the next level, but you won't be able to record a High Score for completing a level using cheats.
 
+* The cheat code `master key` will let you play any level, even if it's not unlocked yet.
+* During gameplay, the cheat code `warp whistle` will "complete" the current level but not set a high score.
+
 ## Azulian Tag
 
 **New in v0.12.0**

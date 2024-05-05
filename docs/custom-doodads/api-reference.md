@@ -6,72 +6,86 @@ During gameplay, the doodads are called "actors" which are the _instantiated_ fo
 
 Table of Contents:
 
-*   [Global Functions](#global-functions)
-    *   [EndLevel()](#endlevel)
-    *   [FailLevel()](#faillevelmessage-string)
-    *   [SetCheckpoint()](#setcheckpointpoint)
-    *   [Flash()](#flashmessage-string-args)
-    *   [GetTick()](#gettick-uint64)
-    *   [time.Now()](#timenow-timetime)
-    *   [time.Add()](#timeaddt-timetime-milliseconds-int64-timetime)
-    *   [time.Since()](#timesincetimetime-timeduration) `v0.10.1`
-*   [Console Logging](#console-logging)
-*   [Self](#self) - functions for the current (and other) actors
-    *   [Self.ID()](#selfid-string)
-    *   [Self.IsPlayer()](#selfisplayer-bool) `v0.8.0`
-    *   [Self.GetTag()](#selfgettagstring-name-string)
-    *   [Self.Options()](#selfoptions-string) `v0.13.1`
-    *   [Self.GetOption()](#selfgetoptionstring-name-any) `v0.13.1`
-    *   [Self.Position()](#selfposition-point)
-    *   [Self.MoveTo()](#selfmovetopoint)
-    *   [Self.CameraFollowMe()](#selfcamerafollowme) `v0.13.1`
-    *   [Self.SetHitbox()](#selfsethitboxx-y-w-h-int)
-    *   [Self.Hitbox()](#selfhitbox-rect) `v0.8.0`
-    *   [Self.SetVelocity()](#selfsetvelocityvelocity)
-    *   [Self.GetVelocity()](#selfgetvelocity-velocity) `v0.9.0`
-    *   [Self.SetMobile()](#selfsetmobilebool)
-    *   [Self.SetGravity()](#selfsetgravitybool)
-    *   [Self.SetInvulnerable()](#selfsetinvulnerablebool) `v0.11.0`
-    *   [Self.Invulnerable()](#selfinvulnerable-bool) `v0.11.0`
-    *   [Self.Hide(), Self.Show()](#selfhide-selfshow) `v0.9.0`
-    *   [Self.SetInventory()](#selfsetinventorybool)
-    *   [Self.AddItem()](#selfadditemfilename-string-quantity-int)
-    *   [Self.RemoveItem()](#selfremoveitemfilename-string-quantity-int)
-    *   [Self.HasItem()](#selfhasitemfilename-string-bool)
-    *   [Self.Inventory()](#selfinventory-mapstringint)
-    *   [Self.ShowLayer()](#selfshowlayerindex-int)
-    *   [Self.ShowLayerNamed()](#selfshowlayernamedname-string)
-    *   [Self.AddAnimation()](#selfaddanimationname-string-interval-int-layers-list)
-    *   [Self.PlayAnimation()](#selfplayanimationname-string-callback-func)
-    *   [Self.IsAnimating()](#selfisanimating-bool)
-    *   [Self.StopAnimation()](#selfstopanimation)
-    *   [Self.Destroy()](#selfdestroy)
-*   [Actors](#actors) - actor management functions
-    *   [Actors.At()](#actorsatpoint-actor) `v0.11.0`
-    *   [Actors.FindPlayer()](#actorsfindplayer-actor) `v0.11.0`
-    *   [Actors.New()](#actorsnewfilename-string-actor) `v0.11.0`
-    *   [Actors.SetPlayerCharacter()](#actorssetplayercharacterfilename-string) `v0.11.0`
-*   [Level](#level) - functions and variables relating to the level
-    *   [Level.Difficulty](#leveldifficulty-int) `v0.12.0`
-    *   [Level.ResetTimer](#levelresettimer) `v0.12.0`
-*   [Timers and Intervals](#timers-and-intervals)
-    *   [setTimeout()](#settimeoutfunction-milliseconds-int-int)
-    *   [setInterval()](#setintervalfunction-milliseconds-int-int)
-    *   [clearTimeout()](#cleartimeoutid-int)
-    *   [clearInterval()](#clearintervalid-int)
-*   [Type Constructors](#type-constructors) - native types
-    *   [RGBA(r,g,b,a)](#rgbared-green-blue-alpha-uint8)
-    *   [Point(x,y)](#pointx-y-int)
-    *   [Vector(x,y)](#vectorx-y-float64)
-*   [Event Handlers](#event-handlers)
-    *   [Events.OnCollide()](#eventsoncollide-funcevent)
-    *   [Events.OnLeave()](#eventsonleave-funcevent)
-    *   [Events.RunKeypress()](#eventsrunkeypress-funcevent)
-*   [Pub/Sub Communication](#pubsub-communication) - for linked doodads
-    *   [Official, Standard Pub/Sub Messages](#official-standard-pubsub-messages)
-    *   [Message.Publish()](#messagepublishname-string-data)
-    *   [Message.Subscribe()](#messagesubscribename-string-function)
-    *   [Message.Broadcast()](#messagebroadcastname-string-data)
+- [JavaScript API](#javascript-api)
+  - [Global Functions](#global-functions)
+    - [EndLevel()](#endlevel)
+    - [FailLevel(message string)](#faillevelmessage-string)
+    - [SetCheckpoint(Point)](#setcheckpointpoint)
+    - [Flash(message string, args...)](#flashmessage-string-args)
+    - [GetTick() uint64](#gettick-uint64)
+    - [time.Now() time.Time](#timenow-timetime)
+    - [time.Add(t time.Time, milliseconds int64) time.Time](#timeaddt-timetime-milliseconds-int64-timetime)
+    - [time.Since(time.Time) time.Duration](#timesincetimetime-timeduration)
+  - [Console Logging](#console-logging)
+  - [Self](#self)
+    - [Self.ID() string](#selfid-string)
+    - [Self.IsPlayer() bool](#selfisplayer-bool)
+    - [Self.Doodad() Doodad](#selfdoodad-doodad)
+    - [Self.GetTag(string name) string](#selfgettagstring-name-string)
+    - [Self.Options() \[\]string](#selfoptions-string)
+    - [Self.GetOption(string name) Any](#selfgetoptionstring-name-any)
+    - [Self.Position() Point](#selfposition-point)
+    - [Self.MoveTo(Point)](#selfmovetopoint)
+    - [Self.MoveBy(Point)](#selfmovebypoint)
+    - [Self.CameraFollowMe()](#selfcamerafollowme)
+    - [Self.IsOnScreen() bool](#selfisonscreen-bool)
+    - [Self.SetHitbox(x, y, w, h int)](#selfsethitboxx-y-w-h-int)
+    - [Self.Hitbox() Rect](#selfhitbox-rect)
+    - [Self.SetVelocity(Velocity)](#selfsetvelocityvelocity)
+    - [Self.Velocity() Velocity](#selfvelocity-velocity)
+    - [Self.SetMobile(bool)](#selfsetmobilebool)
+    - [Self.IsMobile() bool](#selfismobile-bool)
+    - [Self.SetGravity(bool)](#selfsetgravitybool)
+    - [Self.HasGravity() bool](#selfhasgravity-bool)
+    - [Self.Grounded() bool](#selfgrounded-bool)
+    - [Self.SetGrounded(bool)](#selfsetgroundedbool)
+    - [Self.SetWet(bool)](#selfsetwetbool)
+    - [Self.IsWet() bool](#selfiswet-bool)
+    - [Self.SetInvulnerable(bool)](#selfsetinvulnerablebool)
+    - [Self.Invulnerable() bool](#selfinvulnerable-bool)
+    - [Self.Hide(), Self.Show()](#selfhide-selfshow)
+    - [Self.Freeze(), Self.Unfreeze()](#selffreeze-selfunfreeze)
+    - [Self.IsFrozen() bool](#selfisfrozen-bool)
+    - [Self.SetInventory(bool)](#selfsetinventorybool)
+    - [Self.AddItem(filename string, quantity int)](#selfadditemfilename-string-quantity-int)
+    - [Self.RemoveItem(filename string, quantity int)](#selfremoveitemfilename-string-quantity-int)
+    - [Self.HasItem(filename string) bool](#selfhasitemfilename-string-bool)
+    - [Self.ListItems() \[\]string](#selflistitems-string)
+    - [Self.Inventory() map\[string\]int](#selfinventory-mapstringint)
+    - [Self.LayerCount() int](#selflayercount-int)
+    - [Self.ShowLayer(index int)](#selfshowlayerindex-int)
+    - [Self.ShowLayerNamed(name string)](#selfshowlayernamedname-string)
+    - [Self.AddAnimation(name string, interval int, layers list)](#selfaddanimationname-string-interval-int-layers-list)
+    - [Self.PlayAnimation(name string, callback func())](#selfplayanimationname-string-callback-func)
+    - [Self.IsAnimating() bool](#selfisanimating-bool)
+    - [Self.StopAnimation()](#selfstopanimation)
+    - [Self.Destroy()](#selfdestroy)
+  - [Actors](#actors)
+    - [Actors.At(Point) \[\]\*Actor](#actorsatpoint-actor)
+    - [Actors.FindPlayer() \*Actor](#actorsfindplayer-actor)
+    - [Actors.New(filename string) \*Actor](#actorsnewfilename-string-actor)
+    - [Actors.SetPlayerCharacter(filename string)](#actorssetplayercharacterfilename-string)
+  - [Level](#level)
+    - [Level.Difficulty int](#leveldifficulty-int)
+    - [Level.ResetTimer()](#levelresettimer)
+  - [Timers and Intervals](#timers-and-intervals)
+    - [setTimeout(function, milliseconds int) int](#settimeoutfunction-milliseconds-int-int)
+    - [setInterval(function, milliseconds int) int](#setintervalfunction-milliseconds-int-int)
+    - [clearTimeout(id int)](#cleartimeoutid-int)
+    - [clearInterval(id int)](#clearintervalid-int)
+  - [Type Constructors](#type-constructors)
+    - [RGBA(red, green, blue, alpha uint8)](#rgbared-green-blue-alpha-uint8)
+    - [Point(x, y int)](#pointx-y-int)
+    - [Vector(x, y float64)](#vectorx-y-float64)
+  - [Event Handlers](#event-handlers)
+    - [Events.OnCollide( func(event) )](#eventsoncollide-funcevent-)
+    - [Events.OnLeave( func(event) )](#eventsonleave-funcevent-)
+    - [Events.RunKeypress( func(event) )](#eventsrunkeypress-funcevent-)
+  - [Pub/Sub Communication](#pubsub-communication)
+    - [Official, Standard Pub/Sub Messages](#official-standard-pubsub-messages)
+    - [Message.Publish(name string, data...)](#messagepublishname-string-data)
+    - [Message.Subscribe(name string, function)](#messagesubscribename-string-function)
+    - [Message.Broadcast(name string, data...)](#messagebroadcastname-string-data)
 
 * * *
 
@@ -106,6 +120,8 @@ Flash a message on screen to the user.
 
 Flashed messages appear at the bottom of the screen and fade out after a few moments. If multiple messages are flashed at the same time, they stack from the bottom of the window with the newest message on bottom.
 
+The message and args follow the Go language's `fmt.Printf` syntax: %s for strings, %d for integers, %+v to stringify structs and objects verbosely.
+
 Don't abuse this feature as spamming it may annoy the player.
 
 ### GetTick() uint64
@@ -115,6 +131,10 @@ Returns the current game tick. This value started at zero when the game was laun
 ### time.Now() time.Time
 
 This exposes the Go standard library function `time.Now()` that returns the current date and time as a Go time.Time value.
+
+🚨 **Race condition warning:** it is not reliable to use wallclock time when you want precise timing in relation to the game state. If the game is running at a slower or faster than usual frame rate, doodad scripts relying on wallclock time may run at the wrong time.
+
+It is safer to use `GetTick()` for precise timing purposes, as it will be bound to the game's logic tick.
 
 ### time.Add(t time.Time, milliseconds int64) time.Time
 
@@ -148,7 +168,7 @@ The `time` global exposes the following duration intervals as seen in the above 
 
 ## Console Logging
 
-Like in node.js and the web browser, `console.log` and friends are available for logging from a doodad script. Logs are emitted to the same place as the game's logs are.
+Like in node.js and the web browser, `console.log` and friends are available for logging from a doodad script. Logs are emitted to the same place as the game's logs are (e.g. standard output and to your [profile directory](/profile-directory.html)).
 
 ```javascript
 console.log("Hello world!");
@@ -157,7 +177,6 @@ console.debug("Debug messages shown when the game is in debug mode");
 console.warn("Warning-level messages");
 console.error("Error-level messages");
 ```
-
 
 * * *
 
@@ -181,6 +200,15 @@ Returns the "actor ID" of the doodad instance loaded inside of a level. This is 
 **New in v0.8.0**
 
 Check if the doodad is the player character. Some enemy creature doodads check this so as to disable their normal A.I. movement pattern and allow player controls to set its animations.
+
+### Self.Doodad() Doodad
+
+**New in v0.14.0**
+
+This returns the Doodad object associated with the current actor. A non-exhaustive list of some of its useful properties include:
+
+* Filename string
+* Size Rect
 
 ### Self.GetTag(string name) string
 
@@ -230,7 +258,6 @@ var p = Self.Position()
 console.log("I am at %d,%d", p.X, p.Y)
 ```
 
-
 ### Self.MoveTo(Point)
 
 Teleport the current doodad to an exact point on the level.
@@ -240,6 +267,13 @@ Teleport the current doodad to an exact point on the level.
 Self.MoveTo(Point(0, 0))
 ```
 
+### Self.MoveBy(Point)
+
+Move the current doodad by a relative X,Y position.
+
+```javascript
+Self.MoveBy(Point(5, 0))
+```
 
 ### Self.CameraFollowMe()
 
@@ -249,6 +283,9 @@ Attract the focus of the game's camera to be centered on your doodad, instead of
 
 If the player inputs a directional control, they will reclaim the camera's focus.
 
+### Self.IsOnScreen() bool
+
+Returns true if the actor is currently within the viewport of the level. Doodads may check this to decide whether to play their sound effects or perhaps even pause their logic.
 
 ### Self.SetHitbox(x, y, w, h int)
 
@@ -284,7 +321,6 @@ function main() {
 }
 ```
 
-
 ### Self.Hitbox() Rect
 
 **New in v0.8.0**
@@ -304,7 +340,6 @@ function main() {
 }
 ```
 
-
 ### Self.SetVelocity(Velocity)
 
 Set the doodad's velocity. Velocity is a type that can be created with the Velocity() constructor, which takes an X and Y value:
@@ -313,16 +348,17 @@ Set the doodad's velocity. Velocity is a type that can be created with the Veloc
 Self.SetVelocity( Velocity(3.2, 7.0) );
 ```
 
-
 A positive X velocity propels the doodad to the right. A positive Y velocity propels the doodad downward.
 
-### Self.GetVelocity() Velocity
+### Self.Velocity() Velocity
 
 **New in v0.9.0**
 
 Returns the current velocity of the doodad.
 
 Note: for playable characters, velocity is currently managed by the game engine.
+
+**Updated in v0.14.0:** GetVelocity has been renamed to Velocity.
 
 ### Self.SetMobile(bool)
 
@@ -336,6 +372,11 @@ Mobile doodads incur extra work for the game doing collision checking so only se
 Self.SetMobile(true);
 ```
 
+### Self.IsMobile() bool
+
+**New in v0.14.0**
+
+Returns true if your actor is marked as mobile.
 
 ### Self.SetGravity(bool)
 
@@ -348,6 +389,33 @@ Self.SetGravity(true);
 console.log(Self.HasGravity()); // true
 ```
 
+### Self.HasGravity() bool
+
+**New in v0.14.0**
+
+Returns true if the actor is affected by gravity.
+
+### Self.Grounded() bool
+
+Returns true if the actor is currently standing on solid ground and resisting the pull of gravity.
+
+### Self.SetGrounded(bool)
+
+**New in v0.14.0**
+
+Update the grounded state of the actor. If `true`, the actor will stop being affected by gravity and is able to jump.
+
+### Self.SetWet(bool)
+
+**New in v0.14.0**
+
+Mark the actor as 'wet' as though they are touching water pixels - turning their sprite blue and giving them the ability to 'swim' (or jump infinitely).
+
+### Self.IsWet() bool
+
+**New in v0.14.0**
+
+Returns true if the actor is currently wet.
 
 ### Self.SetInvulnerable(bool)
 
@@ -371,6 +439,18 @@ Returns whether the invulnerable flag is currently set on an actor.
 
 Hide the current doodad to make it invisible and Show it again.
 
+### Self.Freeze(), Self.Unfreeze()
+
+These functions will "freeze" your actor: their script is paused and they won't move until unfrozen. If the player is frozen, they don't respond to controls.
+
+Generally, this will be called on _other_ actors: for example the Warp Door will freeze and hide the player during the animation.
+
+### Self.IsFrozen() bool
+
+**New in v0.14.0**
+
+Returns true if the actor is currently frozen. Note: if Self is frozen then you aren't able to call this - it's more useful to call it on other actors that your script has frozen.
+
 ### Self.SetInventory(bool)
 
 Set whether this doodad has an inventory and can carry items. Doodads without inventories can not pick up keys and other items.
@@ -381,7 +461,6 @@ The player character always has an inventory, regardless which doodad they are p
 Self.SetInventory(true);
 Self.GetInventory(); // true
 ```
-
 
 ### Self.AddItem(filename string, quantity int)
 
@@ -397,9 +476,21 @@ Remove items from the current doodad's inventory.
 
 Tests if the item is in the inventory.
 
+### Self.ListItems() []string
+
+**New in v0.14.0**
+
+This lists the items (doodad filenames, like "red-key.doodad") in the actor's inventory. Items that have quantity are only counted once.
+
 ### Self.Inventory() map\[string\]int
 
 Returns the doodad's full inventory data, an object that maps filename strings to quantity integers.
+
+### Self.LayerCount() int
+
+**New in v0.14.0**
+
+Returns the count of layers in your doodad's drawing.
 
 ### Self.ShowLayer(index int)
 
@@ -411,7 +502,6 @@ A doodad file can contain multiple layers, or images. The first and default laye
 Self.ShowLayer(0);  // 0 is the first and default layer
 Self.ShowLayer(1);  // show the second layer instead
 ```
-
 
 ### Self.ShowLayerNamed(name string)
 
@@ -427,7 +517,6 @@ Doodads created by the command-line `doodad` tool will have their layers named a
 doodad convert door.png open-1.png open-2.png open-3.png my-door.doodad
 ```
 
-
 ### Self.AddAnimation(name string, interval int, layers list)
 
 Register a named animation for your doodad. `interval` is the time in milliseconds before going to the next frame. `layers` is an array of layer names or indexes to be used for the animation.
@@ -442,7 +531,6 @@ Self.AddAnimation("open", 100, ["open-1", "open-2", "open-3"]);
 Self.AddAnimation("close", 100, [3, 2, 1]);
 ```
 
-
 ### Self.PlayAnimation(name string, callback func())
 
 This starts playing the named animation. The callback function will be called when the animation has completed.
@@ -455,7 +543,6 @@ Self.PlayAnimation("open", function() {
     Self.PlayAnimation("close", null);
 });
 ```
-
 
 ### Self.IsAnimating() bool
 
@@ -566,11 +653,15 @@ setTimeout calls your function after the specified number of milliseconds.
 
 Returns an integer "timeout ID" that you'll need if you want to cancel the timeout with clearTimeout.
 
+**Updated in v0.14.0:** the milliseconds are no longer based on the wallclock but are translated into a concrete number of game ticks for more deterministic outcomes. 1000 milliseconds translates to 60 game ticks to match the frame rate of 60 FPS.
+
 ### setInterval(function, milliseconds int) int
 
 setInterval calls your function repeatedly after every specified number of milliseconds.
 
 Returns an integer "interval ID" that you'll need if you want to cancel the interval with clearInterval.
+
+**Updated in v0.14.0:** the milliseconds are no longer based on the wallclock but are translated into a concrete number of game ticks for more deterministic outcomes. 1000 milliseconds translates to 60 game ticks to match the frame rate of 60 FPS.
 
 ### clearTimeout(id int)
 

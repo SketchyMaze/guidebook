@@ -1,5 +1,87 @@
 # Changes
 
+## v0.14.0 (May 4 2024)
+
+Level screenshots and thumbnails:
+
+* Level files will begin to take thumbnail screenshots of themselves and
+  store them as PNG images embedded with the level data, and are displayed
+  on the Story Mode level select screen.
+    * A thumbnail is saved the first time your level is saved, and can be
+      viewed and re-computed in the Level->Level Properties window of the
+      editor.
+    * Tip: for bounded levels when you want to screenshot the bottom edge,
+      try setting the page type to Unbounded to get a good screenshot and
+      then set it back to Bounded before saving the level.
+* In the editor, a new Level->Take Screenshot menu item is available which
+  will save just your editor viewport as a PNG image to your screenshots
+  folder.
+* In the editor, the Level->Giant Screenshot feature has been improved.
+    * It now will show a confirmation modal, warning that it may take a
+      while to screenshot a very large level.
+    * While the giant screenshot is processing, a progress bar modal will
+      block interaction with the game so that you don't accidentally modify
+      the level while the screenshot is generating.
+
+Updates to the JavaScript API for doodad scripts:
+
+* `setTimeout()` and `setInterval()` will now be more deterministic and
+  reliable to time your doodad scripts with, as they are now based on the
+  game's tick speed. At the target average of 60 FPS, 1000 millisecond
+  timers will fire in 60 game ticks every time.
+* The `Self` API now exposes more functions on the underlying Actor object
+  that points to the current doodad. See the guidebook for full details.
+    * Self.Doodad() *Doodad
+    * Self.GetBoundingRect() Rect
+    * Self.HasGravity() bool
+    * Self.IsFrozen() bool
+    * Self.IsMobile() bool
+    * Self.LayerCount() int
+    * Self.ListItems() []string
+    * Self.SetGrounded(bool)
+    * Self.SetWet(bool)
+    * Self.Velocity() Point
+* Self.GetVelocity() is now deprecated and will be an alias to Self.Velocity.
+
+Some minor changes:
+
+* Tweaked the player movement physics and adjusted doodads accordingly.
+    * The player is given a lower gravity while they are jumping into the air
+      than the standard (faster) gravity when they are falling. This results
+      in a smoother jump animation instead of the player launching quickly from
+      the ground in order to overcome the constant (fast) gravity.
+    * Coyote time where the player can still jump a few frames late when they
+      walk off a cliff and jump late.
+    * Improved character speed when walking up slopes, they will now travel
+      horizontally at their regular speed instead of being slowed down by level
+      collision every step of the way.
+* Sound effects are now preferred to be in OGG format over MP3 as it is more
+  reliable to compile the game cross-platform without the dependency on mpg123.
+* Fix a bug where level chunks on the far right and bottom edge of the screen
+  would flicker out of existence while the level scrolls.
+* When JavaScript exceptions are caught in doodad scripts, the error message
+  will now include the Go and JavaScript stack traces to help with debugging.
+* The game window maximizes on startup to fill the screen.
+* Fixed a few places where the old "Load Level" menu was being called instead
+  of the fancy new one with the listbox.
+* Fixed a touch screen detection bug that was causing the mouse cursor to hide
+  on Macbooks when using their touchpad.
+* Fixed how touch screen mode is activated. The game's mouse cursor will
+  disappear on touch and reappear when your last finger leaves the screen, and
+  then a mouse movement is detected.
+* Add a `--touch` command line flag to the game binary, which forces touch screen
+  mode to always be on (which hides the mouse cursor), in case of touch screen
+  detection errors or annoyances.
+
+Some code cleanup and architecture changes:
+
+* Create a clean build process for FOSS versions of the game, which won't
+  include any license registration code or proprietary features reserved for
+  first-party releases of the game.
+* Dust off the WebAssembly build of the game: thanks to browser innovations
+  performance is very good! But many UI elements fail to draw properly and it
+  is not very usable yet.
+
 ## v0.13.2 (Dec 2 2023)
 
 This release brings some new features and optimization for the game's file
